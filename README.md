@@ -28,3 +28,7 @@ criar superusuario:
 rodar servidor:
 
 ```python3 manage.py runserver``` 
+
+setar static files
+
+```python3 manage.py collectstatic```
