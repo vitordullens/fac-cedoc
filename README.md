@@ -17,17 +17,19 @@ install django2.0:
 
 ```pip install django```
 
+rodar servidor:
+
+```cd project/ && python3 manage.py runserver``` 
+
+## utilities
+
 criar conexao com db(por enquanto sqlite3):
 
-```cd cedoc/ && python3 manage.py migrate``` 
+```python3 manage.py migrate``` 
 
 criar superusuario:
 
 ```python3 manage.py createsuperuser```
-
-rodar servidor:
-
-```python3 manage.py runserver``` 
 
 setar static files
 
