@@ -35,10 +35,6 @@ setar static files
 
 ```python3 manage.py collectstatic```
 
-sincronizar banco de dados
-
-```python3 manage.py syncdb```
-
 criar aplicação
 
 ```python3 manage.py startapp <name>```
