@@ -102,3 +102,6 @@ ENV/
 
 #static files examples
 static_cdn/
+
+#vscode
+.vscode
