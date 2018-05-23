@@ -1,40 +1,40 @@
-# FAC-CeDoc
+# fac-cedoc
 
-## startup
+###  startup
 install virtualenv:
 
-```sudo apt-get install virtualenv```
+`sudo apt-get install virtualenv`
 
 create virtualenv:
 
-```virtualenv –p /usr/bin/python3 venv```
+`virtualenv –p /usr/bin/python3 venv`
 
 activate virtualenv (venv):
 
-```source venv/bin/activate```
+`source venv/bin/activate` or `. venv/bin/activate`
 
 install django2.0:
 
-```pip install django```
+`pip install django`
 
-rodar servidor:
+run server:
 
-```cd project/ && python3 manage.py runserver``` 
+`python manage.py runserver` 
 
-## utilities
+### utilities
 
-criar conexao com db(por enquanto sqlite3):
+connection with db:
 
-```python3 manage.py migrate``` 
+`python manage.py migrate` 
 
-criar superusuario:
+create superuser:
 
-```python3 manage.py createsuperuser```
+`python manage.py createsuperuser`
 
-setar static files
+static files (css and js):
 
-```python3 manage.py collectstatic```
+`python manage.py collectstatic`
 
 criar aplicação
 
-```python3 manage.py startapp <name>```
+`python manage.py startapp <name>`
