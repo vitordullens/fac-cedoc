@@ -9,5 +9,18 @@
 <body>
     <h1>Hello django man</h1>
     <p>What time is it? {{now}}</p>
+    <ol type="I">
+        Transacoes feitas - em negrito mais importante
+        <hr>
+        {% for transacao in transacoes %}
+
+            {% if transacao == 't1' %}
+                <li><b>{{ transacao }}</b></li>
+            {% else %}
+                <li>{{ transacao }}</li>
+            {% endif %}
+        <hr>
+        {% endfor %}
+    </ol>
 </body>
 </html>
