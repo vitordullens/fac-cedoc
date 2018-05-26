@@ -17,7 +17,7 @@ class Doc(models.Model):
     subtitle = models.CharField(max_length=150, blank=True)
     description = models.TextField()
     publisher = models.CharField(max_length=150)
-    fileType = models.CharField(max_length=5, choices=getFileFormats(), default='txt', help_text="File Format")
+    fileType = models.CharField(max_length=5, choices=getFileFormats(), default='txt')
     language = models.CharField(max_length=50)
     # relation (nao sei o que eh isso)
     coverage = models.CharField(max_length=50)
@@ -25,7 +25,11 @@ class Doc(models.Model):
     source = models.CharField(max_length=100)
     date = models.DateTimeField('Document Date')
     fileFormat = models.CharField(max_length=50)
-    submissionDate = models.DateField('Submission Date')
+    submissionDate = models.DateField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return self.title
 
 class Contributor(models.Model):
     contributor = models.CharField(max_length=100)

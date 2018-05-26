@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from cedoc.views import index, new
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index, name='url_index'),
+    path('new/', new, name='url_new'),
 ]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index of the page</title>
+</head>
+<body>
+    <h1>FAC-APP</h1>
+    <h2>Docs no db</h2>
+    <ul>
+        {% for Doc in files%}
+        <li>
+            <b>title:</b> {{ Doc.title }} - <b>file format:</b> {{ Doc.fileFormat }} <b>file type</b> {{ Doc.fileType}}</li>
+        </li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href = '{% url 'url_new' %}' ">Adicionar</button>
+</body>
+</html>
