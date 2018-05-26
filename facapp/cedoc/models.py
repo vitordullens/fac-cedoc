@@ -1,30 +1,43 @@
 from django.db import models
 
 ################################# ACCEPTED FILE TYPES
-def getFileFormats():
+def getFileTypes():
     return (
         ('.pdf', 'Portable Document Format (PDF)'),
         ('.txt', 'Documento de Texto'),
         ('.doc', 'Documento do Word'),
+        ('.md',  'Markdown (MD)'),
         ('.jpg', 'Imagem JPG'),
         ('.png', 'Portable Network Graphics (PNG)'),
         ('.mp3', 'Arquivo de Áudio MP3'),
     )
 
+def getFileFormat():
+    return (
+        ('AN', 'Analog'),
+        ('DG', 'Digital')
+    )
+
+def coverage():
+    return (
+        ('L', 'Local'),
+        ('R', 'Regional'),
+        ('I', 'International'),
+        ('N', 'National')
+    )
 # Create your models here.
 class Doc(models.Model):
-    title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=150, blank=True)
-    description = models.TextField()
-    publisher = models.CharField(max_length=150)
-    fileType = models.CharField(max_length=5, choices=getFileFormats(), default='txt')
-    language = models.CharField(max_length=50)
-    # relation (nao sei o que eh isso)
-    coverage = models.CharField(max_length=50)
-    rights = models.CharField(max_length=100)
-    source = models.CharField(max_length=100)
-    date = models.DateTimeField('Document Date')
-    fileFormat = models.CharField(max_length=50)
+    title = models.CharField('Title', max_length=100)
+    subtitle = models.CharField('Subtitle', max_length=150, blank=True)
+    description = models.TextField('Description')
+    publisher = models.CharField('Publisher', max_length=150)
+    fileType = models.CharField('File Format', max_length=5, choices=getFileTypes(), default='.txt')
+    language = models.CharField('Language', max_length=50)
+    coverage = models.CharField('Coverage', max_length=2, choices=coverage())
+    rights = models.CharField('Rights', max_length=100)
+    source = models.CharField('Source', max_length=100)
+    date = models.DateField('Document Date')
+    fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG')
     submissionDate = models.DateField(auto_now_add=True)
     
 
@@ -33,8 +46,9 @@ class Doc(models.Model):
 
 class Contributor(models.Model):
     contributor = models.CharField(max_length=100)
-    paper = models.ForeignKey('Doc', on_delete=models.CASCADE)
-
+    role = models.CharField(max_length=100, default="Contributor")
+    paper = models.ManyToManyField(Doc)
+  
 class Image(Doc):
     Image = models.ImageField(upload_to='images/')
 
