@@ -12,7 +12,7 @@
         {% for transacao in transacoes%}
         <li>{{ transacao.descricao }} - {{transacao.data }} - {{ transacao.valor}}</li>
         {% endfor %}
-
     </ul>
+    <button onclick="location.href = '{% url 'url_nova' %}' ">Novo</button>
 </body>
 </html>
