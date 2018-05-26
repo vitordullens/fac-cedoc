@@ -10,7 +10,7 @@
     <h1>Transacoes que estao no db</h1>
     <ul>
         {% for transacao in transacoes%}
-        <li>{{ transacao.descricao }} - {{transacao.data }} - {{ transacao.valor}}</li>
+        <li>{{ transacao.descricao }} - {{transacao.data }} - {{ transacao.valor}} - <button onclick="location.href = '{% url 'url_update' transacao.id %}' ">Update</button><button onclick="location.href = '{% url 'url_delete' transacao.id %}' ">Remover</button></li>
         {% endfor %}
     </ul>
     <button onclick="location.href = '{% url 'url_nova' %}' ">Novo</button>
