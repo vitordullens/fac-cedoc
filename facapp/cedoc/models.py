@@ -29,10 +29,9 @@ def coverage():
 class Doc(models.Model):
     title = models.CharField('Title', max_length=100)
     subtitle = models.CharField('Subtitle', max_length=150, blank=True)
-    description = models.TextField('Description')
-    publisher = models.CharField('Publisher', max_length=150)
+    description = models.TextField('Description', blank=True)
+    publisher = models.CharField('Publisher', max_length=150, default="FAC-UnB")
     fileType = models.CharField('File Format', max_length=5, choices=getFileTypes(), default='.txt')
-    language = models.CharField('Language', max_length=50)
     coverage = models.CharField('Coverage', max_length=2, choices=coverage())
     rights = models.CharField('Rights', max_length=100)
     source = models.CharField('Source', max_length=100)
@@ -53,4 +52,5 @@ class Image(Doc):
     Image = models.ImageField(upload_to='images/')
 
 class TextFile(Doc):
+    language = models.CharField('Language', max_length=50, default='Português')
     File = models.FileField(upload_to='texts/')
