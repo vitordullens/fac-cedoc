@@ -11,7 +11,7 @@ def index(request):
 
 def new(request):
     data = {}
-    form = UploadForm(request.POST or None)
+    form = UploadForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
         return redirect('url_index')

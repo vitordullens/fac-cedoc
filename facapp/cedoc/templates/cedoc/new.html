@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>NOT WORKING YET - DON'T INSERT</h1>
-    <form method="POST">
+    <form enctype="multipart/form-data" method="POST">
             {% csrf_token %}
 
             {{ form.as_p }}
