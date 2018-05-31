@@ -25,6 +25,12 @@ def coverage():
         ('I', 'International'),
         ('N', 'National')
     )
+
+def accept():
+    return(
+        (True, 'Sim'),
+        (False, 'Nao'),
+    )
 # Create your models here.
 class Doc(models.Model):
     title = models.CharField('Title', max_length=100)
@@ -38,6 +44,8 @@ class Doc(models.Model):
     date = models.DateField('Document Date')
     fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG')
     submissionDate = models.DateField(auto_now_add=True)
+    accepted = models.BooleanField('Accept file', choices=accept(), default=False)
+
     
 
     def __str__(self):
