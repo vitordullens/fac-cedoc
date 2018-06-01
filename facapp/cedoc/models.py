@@ -1,16 +1,6 @@
 from django.db import models
 
 ################################# ACCEPTED FILE TYPES
-def getFileTypes():
-    return (
-        ('.pdf', 'Portable Document Format (PDF)'),
-        ('.txt', 'Documento de Texto'),
-        ('.doc', 'Documento do Word'),
-        ('.md',  'Markdown (MD)'),
-        ('.jpg', 'Imagem JPG'),
-        ('.png', 'Portable Network Graphics (PNG)'),
-        ('.mp3', 'Arquivo de Áudio MP3'),
-    )
 
 def getFileFormat():
     return (
@@ -31,7 +21,7 @@ class Doc(models.Model):
     subtitle = models.CharField('Subtitle', max_length=150, blank=True)
     description = models.TextField('Description', blank=True)
     publisher = models.CharField('Publisher', max_length=150, default="FAC-UnB")
-    fileType = models.CharField('File Format', max_length=5, choices=getFileTypes(), default='.txt')
+    fileType = models.CharField('File Format', max_length=5, default='.txt')
     coverage = models.CharField('Coverage', max_length=2, choices=coverage())
     rights = models.CharField('Rights', max_length=100)
     source = models.CharField('Source', max_length=100)
@@ -49,8 +39,37 @@ class Contributor(models.Model):
     paper = models.ManyToManyField(Doc)
   
 class Image(Doc):
+    formats = (
+        ('....', 'Photography Hard Copy'),
+        ('.jpg', 'Imagem JPG'),
+        ('.png', 'Portable Network Graphics (PNG)'),
+        ('.gif', 'Graphics Interchange Format (GIF)'),
+        ('.bmp', 'Windows bitmap (BMP)'),
+        ('.cgm', 'Computer Graphics Metafile (CGM)'),
+        ('.svg', 'Scalable Vector Graphics (SVG)'),
+        ('.tif', 'Tagged Image File Format (TIFF)'),
+        ('.cdr', 'CorelDRAW (CDR)'),
+        ('.pdf', 'Portable Document Format (PDF)')
+
+    )
+    super.fileType.choices = formats
     Image = models.ImageField(upload_to='images/')
 
 class TextFile(Doc):
+    formats = (
+        ('book', 'Printed Book'),
+        ('blet', 'Printed Booklet'),
+        ('atrc', 'Printed Article'),
+        ('.pdf', 'Portable Document Format (PDF)'),
+        ('.txt', 'Text Document'),
+        ('.doc', 'Microsoft Word Document'),
+        ('.docx', 'Office Open XML (DOCX)'),
+        ('.odt', 'OpenDocument TExt File (ODT)'),
+        ('.epub', 'Eletronic Publication (EPUB)'),
+        ('.html', 'HyperText Markup Language (HTML)'),
+        ('.md',  'Markdown (MD)'),
+        ('.csv', 'Comma Separated Values (CSV)'),
+    )
+    super.fileType.choices = formats
     language = models.CharField('Language', max_length=50, default='Português')
     File = models.FileField(upload_to='texts/')
