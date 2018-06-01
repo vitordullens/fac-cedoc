@@ -47,37 +47,25 @@ class Contributor(models.Model):
     paper = models.ManyToManyField(Doc)
   
 class Image(Doc):
-    formats = (
-        ('....', 'Photography Hard Copy'),
-        ('.jpg', 'Imagem JPG'),
-        ('.png', 'Portable Network Graphics (PNG)'),
-        ('.gif', 'Graphics Interchange Format (GIF)'),
-        ('.bmp', 'Windows bitmap (BMP)'),
-        ('.cgm', 'Computer Graphics Metafile (CGM)'),
-        ('.svg', 'Scalable Vector Graphics (SVG)'),
-        ('.tif', 'Tagged Image File Format (TIFF)'),
-        ('.cdr', 'CorelDRAW (CDR)'),
-        ('.pdf', 'Portable Document Format (PDF)')
-
-    )
-    super.fileType.choices = formats
-    Image = models.ImageField(upload_to='images/')
+    Image = models.ImageField(upload_to='images/', blank=True)
 
 class TextFile(Doc):
-    formats = (
-        ('book', 'Printed Book'),
-        ('blet', 'Printed Booklet'),
-        ('atrc', 'Printed Article'),
-        ('.pdf', 'Portable Document Format (PDF)'),
-        ('.txt', 'Text Document'),
-        ('.doc', 'Microsoft Word Document'),
-        ('.docx', 'Office Open XML (DOCX)'),
-        ('.odt', 'OpenDocument TExt File (ODT)'),
-        ('.epub', 'Eletronic Publication (EPUB)'),
-        ('.html', 'HyperText Markup Language (HTML)'),
-        ('.md',  'Markdown (MD)'),
-        ('.csv', 'Comma Separated Values (CSV)'),
-    )
-    super.fileType.choices = formats
     language = models.CharField('Language', max_length=50, default='Português')
-    File = models.FileField(upload_to='texts/')
+    File = models.FileField(upload_to='texts/', blank=True)
+
+class AudioFile(Doc):
+    formats = (
+        ('.mp3', 'MP3 Audio'),
+        ('.wav', 'Microsoft Wave (WAV)'),
+        ('.aif', 'Audio Interchange File Format (AIFF)')
+    )
+    Doc.fileType.choices = formats
+    File = models.FileField(upload_to='audio/', blank=True)
+
+class VideoFile(Doc):
+    formats = (
+        ('.mp4', 'MP4 Format'),
+        ('.mpeg', 'MPEG Format'),
+    )
+    Doc.fileType.choices = formats
+    File = models.FileField(upload_to='video/', blank=True)
