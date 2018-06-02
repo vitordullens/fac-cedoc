@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Option</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-    <button onclick="location.href = '{% url 'url_new_text' %}' ">Adicionar Texto</button>    
-    <button onclick="location.href = '{% url 'url_new_image' %}' ">Adicionar Imagem</button>
+    <button class="btn" onclick="location.href = '{% url 'url_new_text' %}' "><i class="fa fa-file-text"></i> Adicionar Texto</button>    
+    <button onclick="location.href = '{% url 'url_new_image' %}' "><i class="fa fa-image"></i> Adicionar Imagem</button>
 
 </body>
 </html>
