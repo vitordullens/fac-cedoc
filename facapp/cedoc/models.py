@@ -51,12 +51,14 @@ def accept():
         (True, 'Sim'),
         (False, 'Nao'),
     )
+    
 # Create your models here.
 class Doc(models.Model):
     title = models.CharField('Title', max_length=100)
     subtitle = models.CharField('Subtitle', max_length=150, blank=True)
     description = models.TextField('Description', blank=True)
     publisher = models.CharField('Publisher', max_length=150, default="FAC-UnB")
+    # TODO: create options specific for each kind of document
     fileType = models.CharField('File Format', max_length=5, default='.txt', choices=getFileTypes())
     coverage = models.CharField('Coverage', max_length=2, choices=coverage())
     rights = models.CharField('Rights', max_length=100)
@@ -66,11 +68,10 @@ class Doc(models.Model):
     submissionDate = models.DateField(auto_now_add=True)
     accepted = models.BooleanField('Accept file', choices=accept(), default=False)
 
-    
-
     def __str__(self):
         return self.title
 
+# TODO: ask what's the best way to implement this
 class Contributor(models.Model):
     contributor = models.CharField(max_length=100)
     role = models.CharField(max_length=100, default="Contributor")

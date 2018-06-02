@@ -9,8 +9,10 @@
 </head>
 <body>
 
-    <button class="btn" onclick="location.href = '{% url 'url_new_text' %}' "><i class="fa fa-file-text"></i> Adicionar Texto</button>    
-    <button onclick="location.href = '{% url 'url_new_image' %}' "><i class="fa fa-image"></i> Adicionar Imagem</button>
+    <button name="text" onclick="location.href = '{% url 'url_new_entry' 'text' %}' "><i class="fa fa-file-text"></i> Adicionar Texto</button>    
+    <button name="image" onclick="location.href = '{% url 'url_new_entry' 'image' %}' "><i class="fa fa-image"></i> Adicionar Imagem</button>
+    <button name="audio" onclick="location.href = '{% url 'url_new_entry' 'audio' %}' "><i class="fa fa-headphones"></i>  Adicionar Áudio</button>
+    <button name="audio" onclick="location.href = '{% url 'url_new_entry' 'video' %}' "><i class="fa fa-video-camera"></i>  Adicionar Vídeo</button>
 
 </body>
 </html>

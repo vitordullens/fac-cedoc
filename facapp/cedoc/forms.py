@@ -65,7 +65,7 @@ class AudioUpload(ModelForm):
             'fileType' : Select(choices=FORMATS)
         }
 
-class VifdeoUpload(ModelForm):
+class VideoUpload(ModelForm):
     class Meta:
         FORMATS = (
             ('.mp4', 'MP4 Format'),

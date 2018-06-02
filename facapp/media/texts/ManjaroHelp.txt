@@ -1,0 +1,37 @@
+# Manjaro Useful Commands
+
+# Useful (?) yet mostly not relevant Commands
+    - knowing stuff
+    
+    $ date                  (shows date)
+    $ cal                   (calendar)
+    
+    $uname -a               (kernel info)
+    $cat /proc/cpuinfo      (cpu info)
+    $cat /proc/meminfo      (memory info)
+    
+    $acpi                   (battery info)
+    
+# Dealing with Packages
+    - Installing Packages:
+    $ pacman -S <package name>
+    
+    - Removing Packages:    
+    $ pacman -R <package name>
+
+    - System Update:
+    $ pacman -Syu
+
+    - Orphaned nodes:
+    $ pacman -Qdt                                  (lists orphan nodes)
+    $ sudo pacman -Rs $(pacman -Qqdt)              (removes orphan nodes)
+    
+# Mounting Devices
+    - Listing devices
+    $ lsblk -f
+    
+    - Mounting
+    $ mount device_node /mnt/usbstick
+    or
+    $ mount -U UUID /mnt/usbstick
+
