@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateField, widgets, DateInput, Select
-from .models import Doc, Contributor, Image, TextFile
+from .models import Doc, Contributor, Image, TextFile, AudioFile, VideoFile
 
 class DateInput(DateInput):
     input_type = 'date'
@@ -45,6 +45,34 @@ class TextUpload(ModelForm):
         )
         model = TextFile
         fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'File']
+        widgets = {
+            'date' : DateInput(),
+            'fileType' : Select(choices=FORMATS)
+        }
+
+class AudioUpload(ModelForm):
+    class Meta:
+        FORMATS = (
+            ('.mp3', 'MP3 Audio'),
+            ('.wav', 'Microsoft Wave (WAV)'),
+            ('.aif', 'Audio Interchange File Format (AIFF)'),
+        )
+
+        model = AudioFile
+        fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
+        widgets = {
+            'date' : DateInput(),
+            'fileType' : Select(choices=FORMATS)
+        }
+
+class VifdeoUpload(ModelForm):
+    class Meta:
+        FORMATS = (
+            ('.mp4', 'MP4 Format'),
+            ('.mpeg', 'MPEG Format'),
+        )
+        model = VideoFile
+        fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
         widgets = {
             'date' : DateInput(),
             'fileType' : Select(choices=FORMATS)
