@@ -14,7 +14,8 @@
     <ul>
         {% for Doc in files%}
         <li>
-            <b>title:</b> {{ Doc.title }} - <b>file format:</b> {{ Doc.fileFormat }}  - <b>file type</b> {{ Doc.fileType}}</li>
+            <b>title:</b> {{ Doc.title }} - <b>file format:</b> {{ Doc.fileFormat }}  - <b>file type</b> {{ Doc.fileType}}
+            <button onclick="location.href = '{% url 'url_delete' Doc.id %}' ">Delete</button>
         </li>
         {% endfor %}
     </ul>

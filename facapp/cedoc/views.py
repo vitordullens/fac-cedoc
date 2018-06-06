@@ -32,3 +32,8 @@ def new_entry(request, btn):
         return redirect('url_index')
     data['form'] = form
     return render(request, 'cedoc/new_entry.html', data)
+
+def delete(request, pk):
+    doc = Doc.objects.get(pk=pk)
+    doc.delete()
+    return redirect('url_index')
