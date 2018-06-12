@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from .models import Doc, TextFile
-from .forms import ImageUpload, TextUpload, AudioUpload, VideoUpload
+from django.shortcuts import render, redirect, HttpResponse
+from .models import Doc, CampusJournal
+from .forms import ImageUpload, JournalUpload, AudioUpload, VideoUpload
 from facapp.settings import MEDIA_ROOT
 import os
 
@@ -17,9 +17,9 @@ def option(request):
 def new_entry(request, btn):
     data = {}
     form = ""
-    if(btn == 'text'):
-        form = TextUpload(request.POST or None, request.FILES or None)
-        data['file'] = "TEXT"
+    if(btn == 'journal'):
+        form = JournalUpload(request.POST or None, request.FILES or None)
+        data['file'] = "JORNAL CAMPUS"
     elif(btn == 'image'):
         form = ImageUpload(request.POST or None, request.FILES or None)
         data['file'] = "IMAGE"

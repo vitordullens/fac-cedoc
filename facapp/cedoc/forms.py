@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateField, widgets, DateInput, Select
-from .models import Doc, Contributor, Image, TextFile, AudioFile, VideoFile
+from .models import Doc, Image, CampusJournal, AudioFile, VideoFile
 
 class DateInput(DateInput):
     input_type = 'date'
@@ -20,34 +20,19 @@ class ImageUpload(ModelForm):
         ('.pdf', 'Portable Document Format (PDF)')
         )
         model = Image
-        fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'Image']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'Image']
         widgets = {
             'date' : DateInput(),
             'fileType' : Select(choices=FORMATS)
         }
 
-class TextUpload(ModelForm):
+class JournalUpload(ModelForm):
 
     class Meta:
-        FORMATS = (
-            ('book', 'Printed Book'),
-            ('blet', 'Printed Booklet'),
-            ('atrc', 'Printed Article'),
-            ('.pdf', 'Portable Document Format (PDF)'),
-            ('.txt', 'Text Document'),
-            ('.doc', 'Microsoft Word Document'),
-            ('.docx', 'Office Open XML (DOCX)'),
-            ('.odt', 'OpenDocument TExt File (ODT)'),
-            ('.epub', 'Eletronic Publication (EPUB)'),
-            ('.html', 'HyperText Markup Language (HTML)'),
-            ('.md',  'Markdown (MD)'),
-            ('.csv', 'Comma Separated Values (CSV)'),
-        )
-        model = TextFile
-        fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'File']
+        model = CampusJournal
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'author', 'produtor', 'editor', 'collaborator', 'size', 'File']
         widgets = {
             'date' : DateInput(),
-            'fileType' : Select(choices=FORMATS)
         }
 
 class AudioUpload(ModelForm):
@@ -59,7 +44,7 @@ class AudioUpload(ModelForm):
         )
 
         model = AudioFile
-        fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
         widgets = {
             'date' : DateInput(),
             'fileType' : Select(choices=FORMATS)
@@ -72,7 +57,7 @@ class VideoUpload(ModelForm):
             ('.mpeg', 'MPEG Format'),
         )
         model = VideoFile
-        fields = ['title', 'subtitle', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
         widgets = {
             'date' : DateInput(),
             'fileType' : Select(choices=FORMATS)
