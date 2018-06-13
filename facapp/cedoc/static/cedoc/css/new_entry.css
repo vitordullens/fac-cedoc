@@ -5,3 +5,8 @@ body {
 h1 {
     color: green
 }
+
+.fieldWrapper {
+    margin: 50px;
+    background-color: black;
+}

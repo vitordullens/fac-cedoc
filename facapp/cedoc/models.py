@@ -35,7 +35,7 @@ def accept():
     
 # Create your models here.
 class Doc(models.Model):
-    id = models.AutoField(primary_key=True)
+
     # TITLE START - includes many fields
     title = models.CharField('Title', max_length=300, default='Untitled', help_text="Name of the Document")
     description = models.TextField('Description', blank=True)
@@ -53,20 +53,18 @@ class Doc(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta:
-        abstract = True
-
 # TODO: ask what's the best way to implement this
 #class Contributor(models.Model):
 #    contributor = models.CharField(max_length=100)
 #    role = models.CharField(max_length=100, default="Contributor")
 #    paper = models.ManyToManyField(Doc)
-  
-class Image(Doc):
-    Image = models.ImageField(upload_to='images/', blank=True)
 
 class CampusJournal(Doc):
-    description = models.TextField('Description', max_length=300, blank=True, default='Coleção de jornal de laboratório editado pela Faculdade de Comunicação da UnB.')
+
+    def __init__(self, *args, **kwargs):
+        super(CampusJournal, self).__init__(*args, **kwargs)
+        self.description = "Coleção de jornal de laboratório editado pela Faculdade de Comunicação da UnB."
+    
     author = models.CharField('Author', max_length=50, default='Jornalismo')
     produtor = models.CharField('Producer', max_length=100, default="Faculdade de Comunicação da Universidade de Brasília")
     editor = models.CharField('Editor', max_length=100, default="Faculdade de Comunicação da Universidade de Brasília")
@@ -76,7 +74,7 @@ class CampusJournal(Doc):
     repoLocation = models.CharField('Location in Collection', max_length=100, default='Coleções Especiais - BCE')
     cedocLocation = models.CharField('Location in CEDOC', max_length=100, default='Arquivo Físico')
     size = models.CharField('Physical Dimensions', max_length=100, default='26.00 x 40.00 cm', help_text='In centimeters')
-    File = models.FileField(upload_to='texts/', blank=True)
+    File = models.FileField(upload_to='texts/jornal/', blank=True)
 
 class AudioFile(Doc):
     duration = models.DurationField('Audio Duration', default=datetime.timedelta(0))

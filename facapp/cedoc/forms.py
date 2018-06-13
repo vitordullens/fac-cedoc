@@ -1,30 +1,8 @@
 from django.forms import ModelForm, DateField, widgets, DateInput, Select
-from .models import Doc, Image, CampusJournal, AudioFile, VideoFile
+from .models import Doc, CampusJournal, AudioFile, VideoFile
 
 class DateInput(DateInput):
     input_type = 'date'
-
-class ImageUpload(ModelForm):
-    
-    class Meta:
-        FORMATS = (
-        ('....', 'Photography Hard Copy'),
-        ('.jpg', 'Imagem JPG'),
-        ('.png', 'Portable Network Graphics (PNG)'),
-        ('.gif', 'Graphics Interchange Format (GIF)'),
-        ('.bmp', 'Windows bitmap (BMP)'),
-        ('.cgm', 'Computer Graphics Metafile (CGM)'),
-        ('.svg', 'Scalable Vector Graphics (SVG)'),
-        ('.tif', 'Tagged Image File Format (TIFF)'),
-        ('.cdr', 'CorelDRAW (CDR)'),
-        ('.pdf', 'Portable Document Format (PDF)')
-        )
-        model = Image
-        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'Image']
-        widgets = {
-            'date' : DateInput(),
-            'fileType' : Select(choices=FORMATS)
-        }
 
 class JournalUpload(ModelForm):
 

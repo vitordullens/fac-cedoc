@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Doc, CampusJournal
-from .forms import ImageUpload, JournalUpload, AudioUpload, VideoUpload
+from .forms import JournalUpload, AudioUpload, VideoUpload
 from facapp.settings import MEDIA_ROOT
 import os
 
@@ -18,11 +18,8 @@ def new_entry(request, btn):
     data = {}
     form = ""
     if(btn == 'journal'):
-        form = JournalUpload(request.POST or None, request.FILES or None)
+        form = JournalUpload(request.POST or None, request.FILES or None, initial={'description': "Coleção de jornal de laboratório editado pela Faculdade de Comunicação da UnB."})
         data['file'] = "JORNAL CAMPUS"
-    elif(btn == 'image'):
-        form = ImageUpload(request.POST or None, request.FILES or None)
-        data['file'] = "IMAGE"
     elif(btn == 'video'):
         form = VideoUpload(request.POST or None, request.FILES or None)
         data['file'] = "VIDEO"
@@ -38,7 +35,7 @@ def new_entry(request, btn):
 def delete(request, pk):
     doc = Doc.objects.get(pk=pk)
     if(doc.fileType == '.txt' or doc.fileType == '.md' or doc.fileType == '.pdf'):
-        text = TextFile.objects.get(pk=pk).File
+        text = CampusJournal.objects.get(pk=pk).File
         os.remove(os.path.join(MEDIA_ROOT, str(text)))
     doc.delete()
     return redirect('url_index')
