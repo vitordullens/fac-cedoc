@@ -12,13 +12,26 @@
     <h1>FAC-APP</h1>
     <h2>Docs no db</h2>
     <ul>
-        {% for Doc in files%}
-        <li>
-            <b>title:</b> {{ Doc.title }} - <b>file format:</b> {{ Doc.fileFormat }}  - <b>file type</b> {{ Doc.fileType}}
-            <button onclick="location.href = '{% url 'url_delete' Doc.id %}' ">Delete</button>
-        </li>
-        {% endfor %}
+        <h3>
+        {% if user.is_authenticated %}
+            Ola, {{ user.username }}!
+            {% for Doc in files%}
+            <li>
+                    <b>title:</b> {{ Doc.title }} - <b>file format:</b> {{ Doc.fileFormat }}  - <b>file type</b> {{ Doc.fileType}}
+                    <button onclick="location.href = '{% url 'url_delete' Doc.id %}' ">Delete</button>
+            </li>
+            {% endfor %}
+            <br>
+            <button onclick="location.href = '{% url 'url_option' %}' ">Adicionar</button>
+            <button onclick="location.href = '{% url 'logout' %}' ">Logout</button>
+        {% else %}
+            <p>Faça o login :)</p>
+            <button onclick="location.href = '{% url 'login' %}' ">Login</button>
+        {% endif %}
+        </h3>    
+        
     </ul>
-    <button onclick="location.href = '{% url 'url_option' %}' ">Adicionar</button>
+    
+    
 </body>
 </html>
