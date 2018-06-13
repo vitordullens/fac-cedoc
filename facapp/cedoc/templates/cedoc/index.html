@@ -26,7 +26,8 @@
             <button onclick="location.href = '{% url 'logout' %}' ">Logout</button>
         {% else %}
             <p>Faça o login :)</p>
-            <button onclick="location.href = '{% url 'login' %}' ">Login</button>
+            <button onclick="location.href = '{% url 'login' %}' ">Sign In</button>
+            <button onclick="location.href = '{% url 'url_signup' %}' ">Sign Up</button>
         {% endif %}
         </h3>    
         

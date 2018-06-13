@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import Doc, CampusJournal
 from .forms import JournalUpload, AudioUpload, VideoUpload
 from facapp.settings import MEDIA_ROOT
+from django.views import generic
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
 import os
 
 # Create your views here.
@@ -10,6 +13,11 @@ def index(request):
     data = {}
     data['files'] = Doc.objects.all()
     return render(request, 'cedoc/index.html', data)
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
 
 def option(request):
     return render(request, 'cedoc/option.html')
