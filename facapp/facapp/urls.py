@@ -23,6 +23,6 @@ urlpatterns = [
     path('option', cedocViews.option, name='url_option'),
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
     path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
-    path('signup/', cedocViews.SignUp.as_view(), name='url_signup'),
+    path('signup/', cedocViews.SignUp, name='url_signup'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
