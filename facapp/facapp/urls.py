@@ -28,4 +28,5 @@ urlpatterns = [
     path('contributors/<int:pk>', cedocViews.contribs, name='url_contribs'),
     path('signup/', accountsViews.SignUp, name='url_signup'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('edit/<int:pk>', cedocViews.edit, name='url_edit')
 ]

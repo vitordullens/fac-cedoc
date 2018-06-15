@@ -9,6 +9,22 @@ from facapp.settings import MEDIA_ROOT
 from .forms import AudioUpload, ContribUpload, JournalUpload, VideoUpload
 from .models import AudioFile, CampusJournal, Contributor, Doc, VideoFile
 
+# Functions
+def getUnknownModel(request, pk):
+    try:
+        f = CampusJournal.objects.get(pk=pk)
+        form = JournalUpload(request.POST or None, request.FILES or None, instance=f)
+    except:
+        try:
+            f = AudioFile.objects.get(pk=pk)
+            form = AudioUpload(request.POST or None, request.FILES or None, instance=f)
+        except:
+            try:
+                f = VideoFile.objects.get(pk=pk)
+                form = VideoUpload(request.POST or None, request.FILES or None, instance=f)
+            except:
+                pass # Talvez mudar para não deletar a entrada e retornar um erro ?
+    return (f, form)
 # Create your views here.
 
 def index(request):
@@ -23,6 +39,18 @@ def index(request):
         files[doc] = contribs
     data['files'] = files
     return render(request, 'cedoc/index.html', data)
+
+def edit(request, pk):
+    (f, form) = getUnknownModel(request, pk)
+    data = {}
+    data['doc'] = f
+    data['form'] = form
+    if request.method == 'POST':
+        if form.is_valid:
+            form.save()
+            return redirect('url_index')
+    return render(request, 'cedoc/edit.html', data)
+
 
 def option(request):
     if request.user.is_authenticated:
@@ -57,20 +85,9 @@ def new_entry(request, btn):
 def delete(request, pk):
     if request.user.is_authenticated:
         doc = Doc.objects.get(pk=pk)
-        try:
-            f = CampusJournal.objects.get(pk=pk).File
-            os.remove(os.path.join(MEDIA_ROOT, str(f)))
-        except:
-            try:
-                f = AudioFile.objects.get(pk=pk).File
-                os.remove(os.path.join(MEDIA_ROOT, str(f)))
-            except:
-                try:
-                    f = VideoFile.objects.get(pk=pk).File
-                    os.remove(os.path.join(MEDIA_ROOT, str(f)))
-                except:
-                    pass # Talvez mudar para não deletar a entrada e retornar um erro ?
-
+        (f, form) = getUnknownModel(request, pk)
+        if f.File:
+            os.remove(os.path.join(MEDIA_ROOT, str(f.File)))
         doc.delete()
         return redirect('url_index')
     else:
@@ -86,7 +103,7 @@ def contribs(request, pk):
                 string = 'contributor'+str(idx)
                 forms.append( ContribUpload(request.POST or None, prefix=string))
                 if not forms[idx].is_valid():
-                    return HttpResponse("Deu ruim") # one of the forms is not ok
+                    return HttpResponse("Deu ruim") # FIXME: one of the forms is not ok
             # if all forms are valid
             for form in forms:
                 contrib = form.save(commit=False)

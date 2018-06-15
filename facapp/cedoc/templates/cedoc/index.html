@@ -18,7 +18,7 @@
             {% for doc,contributor in files.items%}
             <li>
                     <b>Title:</b> {{ doc.title }} - <b>File format:</b> {{ doc.fileFormat }}  - <b>File type</b> {{ doc.fileType}}
-                    <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Delete</button>
+                    <button onclick="location.href = '{% url 'url_edit' doc.id %}' ">Edit</button>
                     <ul>
                         {% for c in contributor %}
                             <li>{{ c.contributor }}, {{ c.role }}</li>
