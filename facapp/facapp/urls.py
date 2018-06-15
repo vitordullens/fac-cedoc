@@ -23,4 +23,5 @@ urlpatterns = [
     path('option', cedocViews.option, name='url_option'),
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
     path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
+    path('contributors/<int:pk>', cedocViews.contribs, name='url_contribs'),
 ]

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/contribs.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> 
+    <title>Contributors</title>
+</head>
+<body>
+    <h2>Adicionar Contribuidores para {{ doc }}</h2> 
+
+    <form action="{% url 'url_contribs' pk %}" method="POST">
+        {% csrf_token %}
+
+        {% for contrib in forms%}
+        <h3> {{ contrib.prefix }} </h3>
+            <div style="display: inline;"> {{ contrib.as_p }} </div>
+        {% endfor %}
+
+        <input name="i" type="number" value="{{ i }}" style="display: none">
+        
+        <button class="fieldWrapper" method="POST" type="submit">Salvar</button>
+    </form>
+
+    <form action="{% url 'url_contribs' pk %}" method="GET">
+        {% csrf_token %}
+        <input name="i" type="number" value="{{ i }}" style="display: none">
+        <button type="submit"><i class="fas fa-plus"></i> New Contributor</button>
+    </form>
+
+    
+</body>
+</html>

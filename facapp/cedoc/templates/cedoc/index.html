@@ -18,6 +18,13 @@
             <button onclick="location.href = '{% url 'url_delete' Doc.id %}' ">Delete</button>
         </li>
         {% endfor %}
+
+        <h3>Contribuidores</h3>
+        {% for c in contribs %}
+        <li>
+            {{ c.contributor }} - {{ c.paper }}
+        </li>
+        {% endfor %}
     </ul>
     <button onclick="location.href = '{% url 'url_option' %}' ">Adicionar</button>
 </body>

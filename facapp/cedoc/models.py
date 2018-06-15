@@ -54,10 +54,14 @@ class Doc(models.Model):
         return self.title
 
 # TODO: ask what's the best way to implement this
-#class Contributor(models.Model):
-#    contributor = models.CharField(max_length=100)
-#    role = models.CharField(max_length=100, default="Contributor")
-#    paper = models.ManyToManyField(Doc)
+class Contributor(models.Model):
+    contributor = models.CharField('Contributor', max_length=100, default='Unknown', help_text='Name of Contributor')
+    role = models.CharField('Role', max_length=100, default="Contributor", help_text='Role of Contributor in the Project')
+    paper = models.ForeignKey(Doc, on_delete=models.CASCADE)
+
+    def __str__(self):
+        name = self.contributor + "," + self.role + ". Participating in " + Doc.objects.filter(pk=self.paper)
+        return name
 
 class CampusJournal(Doc):
 
@@ -74,6 +78,8 @@ class CampusJournal(Doc):
     repoLocation = models.CharField('Location in Collection', max_length=100, default='Coleções Especiais - BCE')
     cedocLocation = models.CharField('Location in CEDOC', max_length=100, default='Arquivo Físico')
     size = models.CharField('Physical Dimensions', max_length=100, default='26.00 x 40.00 cm', help_text='In centimeters')
+    notas = models.TextField('Notas', blank=True)
+    grafica = models.CharField('Gráfica', max_length=100, blank=True)
     File = models.FileField(upload_to='texts/jornal/', blank=True)
 
 class AudioFile(Doc):
@@ -85,3 +91,4 @@ class VideoFile(Doc):
     duration = models.DurationField('Video Duration', default=datetime.timedelta(0))
     language = models.CharField('Language', max_length=50, default='None', blank=True)
     File = models.FileField(upload_to='video/', blank=True)
+
