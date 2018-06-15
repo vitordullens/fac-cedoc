@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
+
 import cedoc.views as cedocViews
+import accounts.views as accountsViews
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,6 @@ urlpatterns = [
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
     path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
     path('contributors/<int:pk>', cedocViews.contribs, name='url_contribs'),
+    path('signup/', accountsViews.SignUp, name='url_signup'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
