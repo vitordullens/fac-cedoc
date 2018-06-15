@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import cedoc.views as cedocViews
+import accounts.views as accountsViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +24,6 @@ urlpatterns = [
     path('option', cedocViews.option, name='url_option'),
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
     path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
-    path('signup/', cedocViews.SignUp, name='url_signup'),
+    path('signup/', accountsViews.SignUp, name='url_signup'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
