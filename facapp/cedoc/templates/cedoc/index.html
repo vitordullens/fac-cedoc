@@ -14,7 +14,7 @@
     <ul>
         <h3>
         {% if user.is_authenticated %}
-            Ola, {{ user.username }}!
+            Ola, {{ user.first_name }}!
             {% for doc,contributor in files.items%}
             <li>
                     <b>Title:</b> {{ doc.title }} - <b>File format:</b> {{ doc.fileFormat }}  - <b>File type</b> {{ doc.fileType}}
