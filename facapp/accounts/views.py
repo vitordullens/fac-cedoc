@@ -7,7 +7,7 @@ from .forms import SignUpForm
 def SignUp(request):
     data = {}
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
