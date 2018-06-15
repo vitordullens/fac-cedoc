@@ -15,10 +15,16 @@
         <h3>
         {% if user.is_authenticated %}
             Ola, {{ user.username }}!
-            {% for Doc in files%}
+            {% for doc,contributor in files.items%}
             <li>
-                    <b>title:</b> {{ Doc.title }} - <b>file format:</b> {{ Doc.fileFormat }}  - <b>file type</b> {{ Doc.fileType}}
-                    <button onclick="location.href = '{% url 'url_delete' Doc.id %}' ">Delete</button>
+                    <b>Title:</b> {{ doc.title }} - <b>File format:</b> {{ doc.fileFormat }}  - <b>File type</b> {{ doc.fileType}}
+                    <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Delete</button>
+                    <ul>
+                        {% for c in contributor %}
+                            <li>{{ c.contributor }}, {{ c.role }}</li>
+                        {% endfor %}
+                    </ul>
+
             </li>
             {% endfor %}
             <br>

@@ -49,6 +49,7 @@ class Doc(models.Model):
     fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG')
     submissionDate = models.DateField(auto_now_add=True)
     accepted = models.BooleanField('Accept file', choices=accept(), default=False)
+    sender = models.CharField(max_length=50, default="Anonymous")
 
     def __str__(self):
         return self.title
