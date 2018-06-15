@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponse
-from .models import Doc, CampusJournal, Contributor
-from .forms import JournalUpload, AudioUpload, VideoUpload, ContribUpload
-from django.urls import reverse_lazy
-from facapp.settings import MEDIA_ROOT
 import os
+
+from django.shortcuts import HttpResponse, redirect, render
+from django.urls import reverse_lazy
+
+from facapp.settings import MEDIA_ROOT
+
+from .forms import AudioUpload, ContribUpload, JournalUpload, VideoUpload
+from .models import AudioFile, CampusJournal, Contributor, Doc, VideoFile
 
 # Create your views here.
 
@@ -37,9 +40,20 @@ def new_entry(request, btn):
 
 def delete(request, pk):
     doc = Doc.objects.get(pk=pk)
-    if(doc.fileType == '.txt' or doc.fileType == '.md' or doc.fileType == '.pdf'):
-        text = CampusJournal.objects.get(pk=pk).File
-        os.remove(os.path.join(MEDIA_ROOT, str(text)))
+    try:
+        f = CampusJournal.objects.get(pk=pk).File
+        os.remove(os.path.join(MEDIA_ROOT, str(f)))
+    except:
+        try:
+            f = AudioFile.objects.get(pk=pk).File
+            os.remove(os.path.join(MEDIA_ROOT, str(f)))
+        except:
+            try:
+                f = VideoFile.objects.get(pk=pk).File
+                os.remove(os.path.join(MEDIA_ROOT, str(f)))
+            except:
+                pass # Talvez mudar para não deletar a entrada e retornar um erro ?
+
     doc.delete()
     return redirect('url_index')
 
@@ -57,7 +71,7 @@ def contribs(request, pk):
         # if all forms are valid
         for form in forms:
             contrib = form.save(commit=False)
-            contrib.paper = CampusJournal.objects.get(pk=pk)
+            contrib.paper = Doc.objects.get(pk=pk)
             contrib.save()
         return redirect('url_index')
     else:
@@ -75,10 +89,8 @@ def contribs(request, pk):
             contrib.setPrefix('contributor' + str(idx))
             idx += 1
             forms.append(contrib)
-        data['doc'] = CampusJournal.objects.get(pk=pk)
+        data['doc'] = Doc.objects.get(pk=pk)
         data['forms'] = forms
         data['pk'] = pk 
         data['i'] = i
         return render(request, 'cedoc/contribs.html', data)
-
-    
