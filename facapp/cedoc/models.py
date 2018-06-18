@@ -1,4 +1,5 @@
 from django.db import models
+from .validators import validate_CampusJournal
 import datetime
 import django
 ################################# ACCEPTED FILE TYPES
@@ -81,7 +82,7 @@ class CampusJournal(Doc):
     size = models.CharField('Physical Dimensions', max_length=100, default='26.00 x 40.00 cm', help_text='In centimeters')
     notas = models.TextField('Notas', blank=True)
     grafica = models.CharField('Gráfica', max_length=100, blank=True)
-    File = models.FileField(upload_to='texts/jornal/', blank=True)
+    File = models.FileField(upload_to='texts/jornal/', blank=True, validators=[validate_CampusJournal])
 
 class CampusReporter(Doc):
     subject = models.CharField('Assunto', max_length=100, blank=True)
