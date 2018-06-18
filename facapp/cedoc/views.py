@@ -6,8 +6,8 @@ from django.http import HttpResponseForbidden
 
 from facapp.settings import MEDIA_ROOT
 
-from .forms import AudioUpload, ContribUpload, JournalUpload, VideoUpload
-from .models import AudioFile, CampusJournal, Contributor, Doc, VideoFile
+from .forms import AudioUpload, ContribUpload, JournalUpload, VideoUpload, ReporterUpload
+from .models import AudioFile, CampusJournal, Contributor, Doc, VideoFile, CampusReporter
 
 # Functions
 def getUnknownModel(request, pk):
@@ -20,10 +20,11 @@ def getUnknownModel(request, pk):
             form = AudioUpload(request.POST or None, request.FILES or None, instance=f)
         except:
             try:
-                f = VideoFile.objects.get(pk=pk)
-                form = VideoUpload(request.POST or None, request.FILES or None, instance=f)
+                f = CampusReporter.objects.get(pk=pk)
+                form = ReporterUpload(request.POST or None, request.FILES or None, instance=f)
             except:
-                pass # Talvez mudar para não deletar a entrada e retornar um erro ?
+                f = None
+                form = None
     return (f, form)
 # Create your views here.
 
@@ -65,9 +66,9 @@ def new_entry(request, btn):
         if(btn == 'journal'):
             form = JournalUpload(request.POST or None, request.FILES or None, initial={'description': "Coleção de jornal de laboratório editado pela Faculdade de Comunicação da UnB."})
             data['file'] = "JORNAL CAMPUS"
-        elif(btn == 'video'):
-            form = VideoUpload(request.POST or None, request.FILES or None)
-            data['file'] = "VIDEO"
+        elif(btn == 'reporter'):
+            form = ReporterUpload(request.POST or None, request.FILES or None)
+            data['file'] = "CAMPUS REPORTER"
         else:
             form = AudioUpload(request.POST or None, request.FILES or None)
             data['file'] = "AUDIO"

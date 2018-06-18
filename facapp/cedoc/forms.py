@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateField, widgets, DateInput, Select
-from .models import Doc, CampusJournal, AudioFile, VideoFile, Contributor
+from .models import Doc, CampusJournal, AudioFile, VideoFile, Contributor, CampusReporter
 
 class DateInput(DateInput):
     input_type = 'date'
@@ -13,6 +13,15 @@ class JournalUpload(ModelForm):
             'date' : DateInput(),
         }
 
+class ReporterUpload(ModelForm):
+
+    class Meta:
+        model = CampusReporter
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'subject', 'collaborator', 'address', 'printing', 'tiragem']
+        widgets = {
+            'date' : DateInput(),
+        }
+        
 class AudioUpload(ModelForm):
     class Meta:
         FORMATS = (
@@ -43,31 +52,36 @@ class VideoUpload(ModelForm):
 
 class ContribUpload(ModelForm):
     prefix = 'contributor'
+    ROLES = (
+        ('Ed_chefe', 'Editor(a) Chefe'),
+        ('Ed_arte', 'Editor ou diretor de arte'),
+        ('secr', 'Secretário(a)'),
+        ('editor', 'Editor(a)'),
+        ('secr_arte', 'Secretário de redação'),
+        ('reporter', 'Repórter'),
+        ('revisor', 'Revisor(a)'),
+        ('ilust', 'Ilustrador(a)'),
+        ('pj_graf', 'Projeto gráfico'),
+        ('diagram', 'Diagramador'),
+        ('prof', 'Professor'),
+        ('fot', 'Fotógrafo'),
+        ('jorn', 'Jornalista'),
+        ('monit', 'Monitor(a)'),
+        ('equipe', 'Equipe'),
+        ('apoio', 'Apoio')
+    )
 
     def setPrefix(self, str):
         self.prefix = str
 
+    def setRoles(self, roles):
+        self.ROLES = roles
+
     class Meta:
-        ROLES = (
-            ('Ed_chefe', 'Editor(a) Chefe'),
-            ('Ed_arte', 'Editor ou diretor de arte'),
-            ('secr', 'Secretário(a)'),
-            ('editor', 'Editor(a)'),
-            ('secr_arte', 'Secretário de redação'),
-            ('reporter', 'Repórter'),
-            ('revisor', 'Revisor(a)'),
-            ('ilust', 'Ilustrador(a)'),
-            ('pj_graf', 'Projeto gráfico'),
-            ('diagram', 'Diagramador'),
-            ('prof', 'Professor'),
-            ('fot', 'Fotógrafo'),
-            ('jorn', 'Jornalista'),
-            ('monit', 'Monitor(a)'),
-            ('equipe', 'Equipe'),
-            ('apoio', 'Apoio')
-        )
+        
         model = Contributor
         fields = ['contributor', 'role']
         widgets = {
-            'role' : Select(choices=ROLES)
+            'role' : Select(choices=super.ROLES)
         }
+

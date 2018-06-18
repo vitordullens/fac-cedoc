@@ -47,6 +47,7 @@ class Doc(models.Model):
     source = models.CharField('Source', default='Faculdade de Comunicação - FAC' , max_length=100)
     date = models.DateField('Document Date', default=django.utils.timezone.now)
     fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG')
+    language = models.CharField('Language', max_length=50, default='Português')
     submissionDate = models.DateField(auto_now_add=True)
     accepted = models.BooleanField('Accept file', choices=accept(), default=False)
     sender = models.CharField(max_length=50, default="Anonymous")
@@ -74,7 +75,6 @@ class CampusJournal(Doc):
     produtor = models.CharField('Producer', max_length=100, default="Faculdade de Comunicação da Universidade de Brasília")
     editor = models.CharField('Editor', max_length=100, default="Faculdade de Comunicação da Universidade de Brasília")
     collaborator = models.CharField('Collaborator', max_length=100, default="CEDOC")
-    language = models.CharField('Language', max_length=50, default='Português')
     license = models.CharField('License', max_length=50, default='CC BY-NC-ND 4.0')
     repoLocation = models.CharField('Location in Collection', max_length=100, default='Coleções Especiais - BCE')
     cedocLocation = models.CharField('Location in CEDOC', max_length=100, default='Arquivo Físico')
@@ -82,6 +82,14 @@ class CampusJournal(Doc):
     notas = models.TextField('Notas', blank=True)
     grafica = models.CharField('Gráfica', max_length=100, blank=True)
     File = models.FileField(upload_to='texts/jornal/', blank=True)
+
+class CampusReporter(Doc):
+    subject = models.CharField('Assunto', max_length=100, blank=True)
+    collaborator = models.CharField('Collaborator', max_length=100, default="CEDOC")
+    address = models.CharField('Endereço', max_length=150, default='CEDOC - FAC - UnB')
+    printing = models.CharField('Impressão',  max_length=50, blank=True)
+    tiragem = models.CharField('Tiragem', max_length=50, blank=True)
+    File = models.FileField(upload_to='texts/reporter/', blank=True)
 
 class AudioFile(Doc):
     duration = models.DurationField('Audio Duration', default=datetime.timedelta(0))
