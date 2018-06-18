@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up</title>
+    <title>Registrar-se</title>
 </head>
 <body>
-    <h2>Sign up</h2>
+    <h2>Registrar-se</h2>
      <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -22,7 +22,7 @@
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button type="submit">Registrar</button>
   </form>
 </body>
 </html>

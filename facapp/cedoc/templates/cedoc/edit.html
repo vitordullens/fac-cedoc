@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Entry</title>
+    <title>Editar envio</title>
 </head>
 <body>
     <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ form.as_p}}
 
-        <button class="fieldWrapper" type="submit">Submit</button>
+        <button class="fieldWrapper" type="submit">Confirmar</button>
     </form>
 
-    <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Delete</button>
+    <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button>
 </body>
 </html>

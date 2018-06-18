@@ -10,7 +10,7 @@
     <title>New Entry</title>
 </head>
 <body>
-    <h1>NEW {{ file }}</h1>
+    <h1>Novo {{ file }}</h1>
     <form enctype="multipart/form-data" method="POST">
             {% csrf_token %}
 
@@ -24,7 +24,7 @@
                 </div>
             {% endfor %}
 
-            <button class="fieldWrapper" type="submit">Next</button>
+            <button class="fieldWrapper" type="submit">Confirmar</button>
     </form>
     
 </body>
