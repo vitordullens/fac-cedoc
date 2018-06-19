@@ -1,28 +1,81 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registrar-se</title>
+    <link rel="stylesheet" href="{%static  'cedoc/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static  'cedoc/css/signup_style.css'%}">
+    <title>Novo Usuário</title>
 </head>
 <body>
-    <h2>Registrar-se</h2>
-     <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey"> {{ field.help_text|safe }} </small>
-        {% endif %}
-        {% for error in field.errors %}
-          <small style="color: red">{{ error }}</small>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Registrar</button>
-  </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-12 corpo">
+                <div class="row">
+                    <img id="ajuste_logo_unb" src="{%static 'cedoc/image/logo_unb.svg'%}" class="img-responsive">
+
+                </div>
+                <div class="row">
+                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 menu_login">
+                        <h2>Novo Usuário</h2><br>
+                        <div id="login">
+                            <form name="form-login" method="POST">
+                                {% csrf_token %}
+
+                               <p>
+                                   <label for="id_username">Usuário:</label><br>
+                                   <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+                                   <small style="color: grey"> Obrigatório. 150 caracteres ou menos. Letras, números e @/./+/-/_ apenas. </small>
+                               </p>
+
+                                <p>
+                                    <label for="id_email">Email:</label><br>
+                                    <input type="email" name="email" maxlength="254" required="" id="id_email" placeholder="usuario@unb.br">
+                                    <small style="color: grey"> Obrigatório. Informe um endereço de email válido. </small>
+                                </p>
+
+                                <p>
+                                    <label for="id_password1">Senha:</label><br>
+                                    <input type="password" name="password1" required="" id="id_password1">
+                                    <small style="color: grey"> </small>
+                                </p>
+                                <ul><li><small style="color: grey">Sua senha não pode ser tão parecida com suas outras informações pessoais.</small></li><li><small style="color: grey">Sua senha precisa conter pelo menos 8 caracteres.</small></li><li><small style="color: grey">Sua senha não pode ser uma senha habitualmente utilizada.</small></li><li><small style="color: grey">Sua senha não pode ser inteiramente numérica.</small></li></ul>
+                                <small style="color: grey"> </small>
+                                <p></p>
+                                <p>
+                                    <label for="id_password2">Confirmação de senha:</label><br>
+                                    <input type="password" name="password2" required="" id="id_password2">
+                                    <small style="color: grey"> Informe a mesma senha informada anteriormente, para verificação. </small>
+                                </p>
+
+                                <!--{% for field in form %}
+                                    <p>
+                                    {{ field.label_tag }}<br>
+                                    {{ field }}
+
+
+                                    {% if field.help_text %}
+                                        <small style="color: grey"> {{ field.help_text|safe }} </small>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <small style="color: red">{{ error }}</small>
+                                    {% endfor %}
+                                    </p>
+                                {% endfor %}-->
+                                <button type="submit">Cadastrar</button>
+                                <button type="button" onclick="location.href ='{% url 'url_index' %}' ">Voltar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <script src="{%static 'cedoc/js/jquery-3.2.1.min.js'%}"></script>
+ <script src="{%static 'cedoc/js/bootstrap.js'%}"></script>
+
 </body>
 </html>

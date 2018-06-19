@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', accountsViews.SignUp, name='url_signup'),
+    # path('accounts/login/', name='url_login'),
 
     path('', cedocViews.index, name='url_index'),
     path('option', cedocViews.option, name='url_option'),
