@@ -12,9 +12,9 @@
     <h1>FAC-APP</h1>
     <ul>
         {% if user.is_authenticated %}
-        <h2>Documentos adicionados</h2>
+        <h2>Ola, {{ user.username }}!</h2>
         <h3>
-            Ola, {{ user.username }}!
+            Documentos adicionados
             {% for doc,contributor in files.items%}
             <li>
                     <b>Titulo:</b> {{ doc.title }} - <b>Formato:</b> {{ doc.fileFormat }}  - <b>Tipo:</b> {{ doc.fileType}}

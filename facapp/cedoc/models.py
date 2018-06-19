@@ -1,5 +1,5 @@
 from django.db import models
-from .validators import validate_CampusJournal
+from .validators import validate_AudioVisual, validate_CampusJournal, validate_CampusReporter
 import datetime
 import django
 ################################# ACCEPTED FILE TYPES
@@ -80,7 +80,7 @@ class CampusReporter(Doc):
     address = models.CharField('Endereço', max_length=150, default='CEDOC - FAC - UnB')
     printing = models.CharField('Impressão',  max_length=50, blank=True)
     tiragem = models.CharField('Tiragem', max_length=50, blank=True)
-    File = models.FileField(upload_to='texts/reporter/', blank=True)
+    File = models.FileField(upload_to='texts/reporter/', blank=True, validators=[validate_CampusReporter])
 
 class AudioVisual(Doc):
     dateProduction = models.DateField('Production Field', default=django.utils.timezone.now)
@@ -90,7 +90,7 @@ class AudioVisual(Doc):
     string = str(country) + ',' + str(state) + ',' + str(city)
     locationProduction = models.CharField('Location of Production', max_length=200, default=string)
     duration = models.DurationField('Video Duration', default=datetime.timedelta(0))
-    File = models.FileField(upload_to='video/', blank=True)
+    File = models.FileField(upload_to='video/', blank=True, validators=[validate_AudioVisual])
 
 class Contributor(models.Model):
     contributor = models.CharField('Contributor', max_length=100, default='Unknown', help_text='Name of Contributor')
