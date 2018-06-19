@@ -34,10 +34,9 @@
                                 </span>
                                 <input id="id_password" name="password" type="password" class="form-control" placeholder="Senha">
 
-                                {% if form.errors %}
-                                    <p class=" label label-danger">
-                                        Seu usuário e senha não correspondem. Por favor tente novamente.
-                                    </p>
+                                {% if form.errors %}                                    
+                                    <small style="color: red">Seu usuário e senha não correspondem.</small>
+                                    <small style="color: red">Por favor tente novamente.</small> <br>
                                 {% endif %}
 
                                 <button type="submit">Entrar</button>

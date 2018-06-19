@@ -24,7 +24,7 @@
                             <form name="form-login" method="POST">
                                 {% csrf_token %}
 
-                               <p>
+                            <!--<p>
                                    <label for="id_username">Usuário:</label><br>
                                    <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
                                    <small style="color: grey"> Obrigatório. 150 caracteres ou menos. Letras, números e @/./+/-/_ apenas. </small>
@@ -48,9 +48,9 @@
                                     <label for="id_password2">Confirmação de senha:</label><br>
                                     <input type="password" name="password2" required="" id="id_password2">
                                     <small style="color: grey"> Informe a mesma senha informada anteriormente, para verificação. </small>
-                                </p>
+                                </p>-->
 
-                                <!--{% for field in form %}
+                                {% for field in form %}
                                     <p>
                                     {{ field.label_tag }}<br>
                                     {{ field }}
@@ -63,7 +63,7 @@
                                         <small style="color: red">{{ error }}</small>
                                     {% endfor %}
                                     </p>
-                                {% endfor %}-->
+                                {% endfor %}
                                 <button type="submit">Cadastrar</button>
                                 <button type="button" onclick="location.href ='{% url 'url_index' %}' ">Voltar</button>
                             </form>
