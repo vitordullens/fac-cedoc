@@ -56,16 +56,6 @@ class Doc(models.Model):
     def __str__(self):
         return self.title
 
-# TODO: ask what's the best way to implement this
-class Contributor(models.Model):
-    contributor = models.CharField('Contributor', max_length=100, default='Unknown', help_text='Name of Contributor')
-    role = models.CharField('Role', max_length=100, default="Contributor", help_text='Role of Contributor in the Project')
-    paper = models.ForeignKey(Doc, on_delete=models.CASCADE)
-
-    def __str__(self):
-        name = self.contributor + "," + self.role + ". Participating in " + Doc.objects.filter(pk=self.paper)
-        return name
-
 class CampusJournal(Doc):
 
     def __init__(self, *args, **kwargs):
@@ -92,13 +82,21 @@ class CampusReporter(Doc):
     tiragem = models.CharField('Tiragem', max_length=50, blank=True)
     File = models.FileField(upload_to='texts/reporter/', blank=True)
 
-class AudioFile(Doc):
-    duration = models.DurationField('Audio Duration', default=datetime.timedelta(0))
-    language = models.CharField('Language', max_length=50, default='None', blank=True)
-    File = models.FileField(upload_to='audio/', blank=True)
-
-class VideoFile(Doc):
+class AudioVisual(Doc):
+    dateProduction = models.DateField('Production Field', default=django.utils.timezone.now)
+    country = models.CharField('Country of Production', max_length=50, default='Brasil')
+    state = models.CharField('Country of Production', max_length=50, default='DF')
+    city = models.CharField('Country of Production', max_length=50, default='Brasília')
+    string = str(country) + ',' + str(state) + ',' + str(city)
+    locationProduction = models.CharField('Location of Production', max_length=200, default=string)
     duration = models.DurationField('Video Duration', default=datetime.timedelta(0))
-    language = models.CharField('Language', max_length=50, default='None', blank=True)
     File = models.FileField(upload_to='video/', blank=True)
 
+class Contributor(models.Model):
+    contributor = models.CharField('Contributor', max_length=100, default='Unknown', help_text='Name of Contributor')
+    role = models.CharField('Role', max_length=100, default="Contributor", help_text='Role of Contributor in the Project')
+    paper = models.ForeignKey(Doc, on_delete=models.CASCADE)
+
+    def __str__(self):
+        name = self.contributor + "," + self.role + ". Participating in " + Doc.objects.filter(pk=self.paper)
+        return name

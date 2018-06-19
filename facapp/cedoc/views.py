@@ -6,8 +6,8 @@ from django.http import HttpResponseForbidden
 
 from facapp.settings import MEDIA_ROOT
 
-from .forms import AudioUpload, ContribUpload, JournalUpload, VideoUpload, ReporterUpload
-from .models import AudioFile, CampusJournal, Contributor, Doc, VideoFile, CampusReporter
+from .forms import ContribUpload, JournalUpload, ReporterUpload, AudioVisualUpload
+from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc 
 
 # Functions
 def getUnknownModel(request, pk):
@@ -16,8 +16,8 @@ def getUnknownModel(request, pk):
         form = JournalUpload(request.POST or None, request.FILES or None, instance=f)
     except:
         try:
-            f = AudioFile.objects.get(pk=pk)
-            form = AudioUpload(request.POST or None, request.FILES or None, instance=f)
+            f = AudioVisual.objects.get(pk=pk)
+            form = AudioVisualUpload(request.POST or None, request.FILES or None, instance=f)
         except:
             try:
                 f = CampusReporter.objects.get(pk=pk)
@@ -70,8 +70,8 @@ def new_entry(request, btn):
             form = ReporterUpload(request.POST or None, request.FILES or None)
             data['file'] = "CAMPUS REPORTER"
         else:
-            form = AudioUpload(request.POST or None, request.FILES or None)
-            data['file'] = "AUDIO"
+            form = AudioVisualUpload(request.POST or None, request.FILES or None)
+            data['file'] = "AUDIOVISUAL"
 
         if form.is_valid():
             newEntry = form.save(commit=False)
