@@ -31,15 +31,18 @@ def getUnknownModel(request, pk):
 def index(request):
     data = {}
     files = {}
-    if not request.user.is_superuser:
-        docsOfUser = Doc.objects.filter(sender=request.user.username)
+    if request.user.is_authenticated:
+        if not request.user.is_superuser:
+            docsOfUser = Doc.objects.filter(sender=request.user.username)
+        else:
+            docsOfUser = Doc.objects.all()
+        for doc in docsOfUser:
+            contribs = list(Contributor.objects.filter(paper=doc))
+            files[doc] = contribs
+        data['files'] = files
+        return render(request, 'cedoc/index.html', data)
     else:
-        docsOfUser = Doc.objects.all()
-    for doc in docsOfUser:
-        contribs = list(Contributor.objects.filter(paper=doc))
-        files[doc] = contribs
-    data['files'] = files
-    return render(request, 'cedoc/index.html', data)
+        return redirect(reverse_lazy('login'))
 
 def edit(request, pk):
     (f, form) = getUnknownModel(request, pk)
