@@ -1,17 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load staticfiles %}
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{%static  'cedoc/css/bootstrap.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static  'cedoc/css/login_style.css'%}">
+
 </head>
+
 <body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Entrar</button>
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-12 corpo">
+                <div class="row">
+                    <img id="ajuste_logo_unb" src="{%static 'cedoc/image/logo_unb.svg'%}" class="img-responsive">
+                </div>
+                <div class="row">
+                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 menu_login">
+                        <img id="ajuste_logo_sistema" src="{%static 'cedoc/image/logo_fac.svg'%}" class="img-responsive">
+                        <div id="login">
+                            <form name="form-login" method="POST">
+                                {% csrf_token %}
+
+                                <span>
+                                    <img id="ajuste_icone" src="{%static 'cedoc/image/painel_login_user.png'%}">
+                                </span>
+                                <input id="id_username" name="username" type="text" class="form-control" placeholder="Usuário">
+
+                                <span>
+                                    <img id="ajuste_icone" src="{%static 'cedoc/image/painel_login_password.png'%}">
+                                </span>
+                                <input id="id_password" name="password" type="password" class="form-control" placeholder="Senha">
+
+                                {% if form.errors %}
+                                    <p class=" label label-danger">
+                                        Seu usuário e senha não correspondem. Por favor tente novamente.
+                                    </p>
+                                {% endif %}
+
+                                <button type="submit">Entrar</button>
+                                <button type="button" onclick="location.href ='{% url 'url_signup' %}' ">Novo Usuário</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <script src="{%static 'cedoc/js/jquery-3.2.1.min.js'%}"></script>
+ <script src="{%static 'cedoc/js/bootstrap.js'%}"></script>
 </body>
 </html>
+
+

@@ -21,12 +21,15 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('signup/', accountsViews.SignUp, name='url_signup'),
+
     path('', cedocViews.index, name='url_index'),
     path('option', cedocViews.option, name='url_option'),
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
     path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
     path('contributors/<int:pk>', cedocViews.contribs, name='url_contribs'),
-    path('signup/', accountsViews.SignUp, name='url_signup'),
-    path('accounts/', include('django.contrib.auth.urls')),
+
+
     path('edit/<int:pk>', cedocViews.edit, name='url_edit')
 ]
