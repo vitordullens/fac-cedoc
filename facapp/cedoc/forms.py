@@ -1,4 +1,4 @@
-from django.forms import ModelForm, DateField, widgets, DateInput, Select
+from django.forms import ModelForm, DateField, widgets, DateInput, Select, ChoiceField, RadioSelect
 from .models import Doc, CampusJournal, AudioVisual, Contributor, CampusReporter
 
 class DateInput(DateInput):
@@ -8,7 +8,7 @@ class JournalUpload(ModelForm):
 
     class Meta:
         model = CampusJournal
-        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'author', 'produtor', 'editor', 'collaborator', 'size', 'notas','grafica', 'File']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'author', 'produtor', 'editor', 'collaborator', 'size', 'notas','grafica', 'File', 'url']
         widgets = {
             'date' : DateInput(),
         }
@@ -17,7 +17,7 @@ class ReporterUpload(ModelForm):
 
     class Meta:
         model = CampusReporter
-        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'subject', 'collaborator', 'address', 'printing', 'tiragem', 'File']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'subject', 'collaborator', 'address', 'printing', 'tiragem', 'File', 'url']
         widgets = {
             'date' : DateInput(),
         }
@@ -31,7 +31,7 @@ class AudioVisualUpload(ModelForm):
         )
 
         model = AudioVisual
-        fields = ['title', 'country', 'state', 'city', 'dateProduction','description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File']
+        fields = ['title', 'country', 'state', 'city', 'dateProduction','description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File', 'url']
         widgets = {
             'date' : DateInput(),
             'fileType' : Select(choices=FORMATS)

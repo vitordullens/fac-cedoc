@@ -52,6 +52,7 @@ class Doc(models.Model):
     submissionDate = models.DateField(auto_now_add=True)
     accepted = models.BooleanField('Accept file', choices=accept(), default=False)
     sender = models.CharField(max_length=50, default="Anonymous")
+    url = models.URLField('URL para Documento', blank=True)
 
     def __str__(self):
         return self.title

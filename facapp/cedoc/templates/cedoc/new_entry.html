@@ -8,6 +8,27 @@
     <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/new_entry.css' %}">   
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> 
     <title>New Entry</title>
+
+    <script>
+        function hideAndShow(str){
+            // clear inputs
+            document.getElementById('id_File').value = ""
+            document.getElementById('id_url').value = ""
+
+            // erase both fields
+            document.getElementById('File').classList.add('hidden');
+            document.getElementById('url').classList.add('hidden');
+            
+            // show correct one, blank
+            document.getElementById(str).classList.remove('hidden');
+        }
+    </script>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Novo {{ file }}</h1>
@@ -15,15 +36,34 @@
             {% csrf_token %}
 
             {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }} 
-                    {% if field.help_text %}
-                    <i class="fas fa-info-circle help" title="{{ field.help_text|safe }}"></i>
-                    {% endif %}
-                </div>
+                {% if field.name != 'File' and field.name != 'url'%}
+                    <div class="fieldWrapper">
+                        {{ field.errors }}
+                        {{ field.label_tag }} {{ field }} 
+                        {% if field.help_text %}
+                        <i class="fas fa-info-circle help" title="{{ field.help_text|safe }}"></i>
+                        {% endif %}
+                    </div>
+                {% endif %}
             {% endfor %}
 
+            <input type="radio" name="control" onclick="hideAndShow('File')" value="1" checked>Arquivo</input>
+            <input type="radio" name="control" onclick="hideAndShow('url')" value="2">URL</input>
+
+            <div id="File" class="fieldWrapper">
+                {{ form.File.errors}}
+                {{ form.File.label_tag}} {{ form.File }}
+                {% if form.File.help_text %}
+                        <i class="fas fa-info-circle help" title="{{ form.File.help_text|safe }}"></i>
+                {% endif %}
+            </div>
+            <div id="url" class="fieldWrapper hidden">
+                {{ form.url.errors}}
+                {{ form.url.label_tag}} {{ form.url }}
+                {% if form.url.help_text %}
+                        <i class="fas fa-info-circle help" title="{{ form.url.help_text|safe }}"></i>
+                {% endif %}
+            </div>
             <button class="fieldWrapper" type="submit">Confirmar</button>
     </form>
     
