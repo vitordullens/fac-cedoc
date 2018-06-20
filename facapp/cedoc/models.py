@@ -24,6 +24,12 @@ def accept():
         (False, 'Nao'),
     )
     
+class Categoria(models.Model):
+    categoria = models.CharField('Categoria', max_length=100)
+
+    def __str__(self):
+        return self.categoria
+
 # Create your models here.
 class Doc(models.Model):
 
@@ -81,6 +87,7 @@ class AudioVisual(Doc):
     string = str(country) + ',' + str(state) + ',' + str(city)
     locationProduction = models.CharField('Location of Production', max_length=200, default=string)
     duration = models.DurationField('Video Duration', default=datetime.timedelta(0))
+    categories = models.ManyToManyField(Categoria)
     File = models.FileField(upload_to='video/', blank=True, validators=[validate_AudioVisual])
 
 class Contributor(models.Model):
