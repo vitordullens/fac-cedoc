@@ -30,6 +30,8 @@ urlpatterns = [
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
     path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
     path('contributors/<int:pk>', cedocViews.contribs, name='url_contribs'),
+    path('index/<int:pk>', cedocViews.idx, name='url_idx'),
+    path('certificates/<int:pk>', cedocViews.certificates, name='url_certificates'),
 
 
     path('edit/<int:pk>', cedocViews.edit, name='url_edit')

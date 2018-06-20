@@ -10,7 +10,8 @@
     <title>Contributors</title>
 </head>
 <body>
-    <h2>Adicionar Contribuidores para {{ doc }}</h2> 
+    <h2>Adicionar {{ item }} </h2> 
+    <h2>Atenção! Coloque o número correto de {{ item }} antes de começar a preencher.</h2>
 
     <form action="{% url 'url_contribs' pk %}" method="POST">
         {% csrf_token %}
@@ -25,10 +26,10 @@
         <button class="fieldWrapper" method="POST" type="submit">Salvar</button>
     </form>
 
-    <form action="{% url 'url_contribs' pk %}" method="GET">
+    <form action="{% url return pk %}" method="GET">
         {% csrf_token %}
         <input name="i" type="number" value="{{ i }}" style="display: none">
-        <button type="submit"><i class="fas fa-plus"></i>Novo Contribuidor</button>
+        <button type="submit"><i class="fas fa-plus"></i>Novo {{ item }}</button>
     </form>
 
     

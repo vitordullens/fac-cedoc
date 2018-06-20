@@ -2,22 +2,12 @@ from django.db import models
 from .validators import validate_AudioVisual, validate_CampusJournal, validate_CampusReporter
 import datetime
 import django
-################################# ACCEPTED FILE TYPES
-def getFileTypes():
-    return (
-        ('book', 'Printed Book'),
-        ('.pdf', 'Portable Document Format (PDF)'),
-        ('.mp3', 'MP3 Audio'),
-        ('.wav', 'Microsoft Wave (WAV)'),
-        ('.aif', 'Audio Interchange File Format (AIFF)'),
-        ('.mp4', 'MP4 Format'),
-        ('.mpeg', 'MPEG Format'),
-    )
 
 def getFileFormat():
     return (
-        ('AN', 'Analog'),
-        ('DG', 'Digital')
+        ('AN', 'Arquivo Físico'),
+        ('UR', 'URL'),
+        ('DG', 'Arquivo Digital')
     )
 
 def coverage():
@@ -42,12 +32,11 @@ class Doc(models.Model):
     description = models.TextField('Description', blank=True)
     publisher = models.CharField('Publisher', max_length=150, default="FAC-UnB")
     # TODO: create options specific for each kind of document
-    fileType = models.CharField('File Format', max_length=5, default='.txt', choices=getFileTypes())
     coverage = models.CharField('Coverage', max_length=2, default='R', choices=coverage())
     rights = models.CharField('Rights', max_length=100, default='Free Access', help_text="Access Rights")
     source = models.CharField('Source', default='Faculdade de Comunicação - FAC' , max_length=100)
     date = models.DateField('Document Date', default=django.utils.timezone.now)
-    fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG')
+    fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG', help_text='Escolha apenas 1 opção')
     language = models.CharField('Language', max_length=50, default='Português')
     submissionDate = models.DateField(auto_now_add=True)
     accepted = models.BooleanField('Accept file', choices=accept(), default=False)
@@ -85,6 +74,7 @@ class CampusReporter(Doc):
 
 class AudioVisual(Doc):
     dateProduction = models.DateField('Production Field', default=django.utils.timezone.now)
+    material = models.CharField('Original Material', max_length=100, blank=True)
     country = models.CharField('Country of Production', max_length=50, default='Brasil')
     state = models.CharField('Country of Production', max_length=50, default='DF')
     city = models.CharField('Country of Production', max_length=50, default='Brasília')
@@ -101,3 +91,19 @@ class Contributor(models.Model):
     def __str__(self):
         name = self.contributor + "," + self.role + ". Participating in " + Doc.objects.filter(pk=self.paper)
         return name
+
+class Certificate(models.Model):
+    certificate = models.CharField('Certificate', max_length=100, help_text='Name of Certificate')
+    date = models.DateField('Certificate Date', default=django.utils.timezone.now, blank=True)
+    paper = models.ForeignKey(AudioVisual, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.certificate
+
+class Index(models.Model):
+    materia = models.CharField('Materia', max_length=100, help_text="Nome da Matéria")
+    author = models.CharField('Author', max_length=100, help_text="Nome da Matéria")
+    paper = models.ForeignKey(CampusJournal, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.materia + ", por " + self.author

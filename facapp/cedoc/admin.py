@@ -5,4 +5,3 @@ from .models import CampusJournal, CampusReporter, AudioVisual
 admin.site.register(CampusJournal)
 admin.site.register(CampusReporter)
 admin.site.register(AudioVisual)
-# admin.site.register(Contributor)

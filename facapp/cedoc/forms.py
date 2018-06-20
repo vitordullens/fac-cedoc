@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateField, widgets, DateInput, Select, ChoiceField, RadioSelect
-from .models import Doc, CampusJournal, AudioVisual, Contributor, CampusReporter
+from .models import Doc, CampusJournal, AudioVisual, Contributor, CampusReporter, Index, Certificate
 
 class DateInput(DateInput):
     input_type = 'date'
@@ -8,16 +8,16 @@ class JournalUpload(ModelForm):
 
     class Meta:
         model = CampusJournal
-        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'author', 'produtor', 'editor', 'collaborator', 'size', 'notas','grafica', 'File', 'url']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'language', 'author', 'produtor', 'editor', 'collaborator', 'size', 'notas','grafica', 'File', 'url']
         widgets = {
-            'date' : DateInput(),
+            'date' : DateInput()
         }
 
 class ReporterUpload(ModelForm):
 
     class Meta:
         model = CampusReporter
-        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'fileType', 'language', 'subject', 'collaborator', 'address', 'printing', 'tiragem', 'File', 'url']
+        fields = ['title', 'description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'language', 'subject', 'collaborator', 'address', 'printing', 'tiragem', 'File', 'url']
         widgets = {
             'date' : DateInput(),
         }
@@ -31,7 +31,7 @@ class AudioVisualUpload(ModelForm):
         )
 
         model = AudioVisual
-        fields = ['title', 'country', 'state', 'city', 'dateProduction','description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'fileType', 'language', 'File', 'url']
+        fields = ['title', 'country', 'state', 'city', 'dateProduction','description', 'publisher', 'coverage', 'rights', 'source', 'fileFormat', 'date', 'duration', 'language', 'File', 'url']
         widgets = {
             'date' : DateInput(),
             'fileType' : Select(choices=FORMATS)
@@ -41,7 +41,7 @@ class ContribUpload(ModelForm):
     prefix = 'contributor'
 
     def setPrefix(self, str):
-        self.prefix = str
+        self.prefix += str
 
     class Meta:
         ROLES = (
@@ -67,4 +67,28 @@ class ContribUpload(ModelForm):
         widgets = {
             'role' : Select(choices=ROLES)
         }
+
+class IndexUpload(ModelForm):
+    prefix = 'index'
+
+    def setPrefix(self, str):
+        self.prefix += str
+
+    class Meta:
+        model = Index
+        fields = ['materia', 'author']
+
+class CertificateUpload(ModelForm):
+    prefix = 'certificate'
+
+    def setPrefix(self, str):
+        self.prefix += str
+
+    class Meta:
+        model = Certificate
+        fields = ['certificate', 'date']
+        widgets = {
+            'date': DateInput()
+        }
+
 

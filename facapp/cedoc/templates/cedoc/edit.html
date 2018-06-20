@@ -5,13 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Editar envio</title>
+
+    <script>
+            function hideAndShow(str){
+                // clear inputs
+                document.getElementById('id_File').value = ""
+                document.getElementById('id_url').value = ""
+    
+                // erase both fields
+                document.getElementById('File').classList.add('hidden');
+                document.getElementById('url').classList.add('hidden');
+                
+                // show correct one, blank
+                if(str != '')
+                    document.getElementById(str).classList.remove('hidden');
+            }
+        </script>
+    
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
 </head>
 <body>
     <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
-        {{ form.as_p}}
+        
+        {% for field in form %}
+            {% if field.name != 'File' and field.name != 'url'%}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }} 
+                    {% if field.help_text %}
+                    <i class="fas fa-info-circle help" title="{{ field.help_text|safe }}"></i>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
 
         <button class="fieldWrapper" type="submit">Confirmar</button>
+        <input type="radio" name="control" onclick="hideAndShow('File')" value="1" checked>Arquivo Dígital</input>
+        <input type="radio" name="control" onclick="hideAndShow('url')" value="2">URL</input>
+        <input type="radio" name="control" onclick="hideAndShow('')" value="3">Arquivo Físico</input>
+
+        <div id="File" class="fieldWrapper">
+            {{ form.File.errors}}
+            {{ form.File.label_tag}} {{ form.File }}
+            {% if form.File.help_text %}
+                    <i class="fas fa-info-circle help" title="{{ form.File.help_text|safe }}"></i>
+            {% endif %}
+        </div>
+        <div id="url" class="fieldWrapper hidden">
+            {{ form.url.errors}}
+            {{ form.url.label_tag}} {{ form.url }}
+            {% if form.url.help_text %}
+                    <i class="fas fa-info-circle help" title="{{ form.url.help_text|safe }}"></i>
+            {% endif %}
+        </div>
     </form>
 
     <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button>

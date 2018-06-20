@@ -20,7 +20,8 @@
             document.getElementById('url').classList.add('hidden');
             
             // show correct one, blank
-            document.getElementById(str).classList.remove('hidden');
+            if(str != '')
+                document.getElementById(str).classList.remove('hidden');
         }
     </script>
 
@@ -36,7 +37,7 @@
             {% csrf_token %}
 
             {% for field in form %}
-                {% if field.name != 'File' and field.name != 'url'%}
+                {% if field.name != 'File' and field.name != 'url'  and field.name != 'fileFormat' %}
                     <div class="fieldWrapper">
                         {{ field.errors }}
                         {{ field.label_tag }} {{ field }} 
@@ -47,9 +48,12 @@
                 {% endif %}
             {% endfor %}
 
-            <input type="radio" name="control" onclick="hideAndShow('File')" value="1" checked>Arquivo</input>
-            <input type="radio" name="control" onclick="hideAndShow('url')" value="2">URL</input>
-
+            <h4>Escolha apenas 1 opção</h4>
+            <div id="id_fileFormat">
+                <input type="radio" name="fileFormat" onclick="hideAndShow('File')" value="DG" checked id="id_fileFormat_0" required>Arquivo Dígital</input>
+                <input type="radio" name="fileFormat" onclick="hideAndShow('url')" value="UR" id="id_fileFormat_1" required>URL</input>
+                <input type="radio" name="fileFormat" onclick="hideAndShow('')" value="AN" id="id_fileFormat_2" required>Arquivo Físico</input>
+            </div>
             <div id="File" class="fieldWrapper">
                 {{ form.File.errors}}
                 {{ form.File.label_tag}} {{ form.File }}
