@@ -18,12 +18,14 @@ import cedoc.views as cedocViews
 import accounts.views as accountsViews
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as authViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('login', authViews.login, name='login'),
+    path('logout', authViews.logout, name='logout'),
+    path('password_reset', authViews.password_reset, name='password_reset'),
     path('signup/', accountsViews.SignUp, name='url_signup'),
-    # path('accounts/login/', name='url_login'),
 
     path('', cedocViews.index, name='url_index'),
     path('option', cedocViews.option, name='url_option'),
