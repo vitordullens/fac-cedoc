@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateField, widgets, DateInput, Select, ChoiceField, RadioSelect
-from .models import Doc, CampusJournal, AudioVisual, Contributor, CampusReporter, Index, Certificate
+from .models import Doc, CampusJournal, AudioVisual, Contributor, CampusReporter, Index, Certificate, Categoria
 
 class DateInput(DateInput):
     input_type = 'date'
@@ -90,5 +90,10 @@ class CertificateUpload(ModelForm):
         widgets = {
             'date': DateInput()
         }
+
+class CategoryUpload(ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['categoria']
 
 

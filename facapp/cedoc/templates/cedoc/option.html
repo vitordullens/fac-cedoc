@@ -13,5 +13,18 @@
     <button name="reporter" onclick="location.href = '{% url 'url_new_entry' 'reporter' %}' "><i class="fa fa-video-camera"></i>  Adicionar Campus Repórter</button>
     <button name="journal" onclick="location.href = '{% url 'url_new_entry' 'journal' %}' "><i class="fa fa-newspaper-o"></i> Adicionar Jornal Campus</button>
 
+    {% if string == '' %}
+        <p>Adicionar nova Categoria</p>
+        <form action="{% url 'url_option' %}" method="POST">
+            {% csrf_token %}
+
+            {{form.as_p}}
+            <button class="fieldWrapper" type="submit">Salvar</button>
+        </form>
+    {% elif user.is_superuser %}
+        <p>{{ string }}</p>
+        <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_option' %}'">Nova Categoria</button>
+    {% endif %}
+
 </body>
 </html>

@@ -6,7 +6,7 @@ from django.http import HttpResponseForbidden
 
 from facapp.settings import MEDIA_ROOT
 
-from .forms import ContribUpload, JournalUpload, ReporterUpload, AudioVisualUpload, IndexUpload, CertificateUpload
+from .forms import ContribUpload, JournalUpload, ReporterUpload, AudioVisualUpload, IndexUpload, CertificateUpload, CategoryUpload
 from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc, Categoria
 
 # Functions
@@ -49,16 +49,41 @@ def edit(request, pk):
     data = {}
     data['doc'] = f
     data['form'] = form
+    c  = Contributor.objects.filter(paper=pk)
+    data['contributors'] = c
     if request.method == 'POST':
-        if form.is_valid:
-            form.save()
-            return redirect('url_index')
+        if 'val' in request.POST:   # validate form
+            print("Validando o form")
+            if form.is_valid:
+                entry = form.save(commit=False)
+                entry.accepted = True
+                entry.save()
+                return redirect('url_index')
+        else:   # delete contributor
+            contribPk = request.POST['del']
+            try:
+                Contributor.objects.get(pk=contribPk).delete()
+            except:
+                pass    # contribuidor nao existe mais
+            # reload page from beginning
+            return redirect(reverse_lazy('url_edit', args=[pk]))
     return render(request, 'cedoc/edit.html', data)
 
 
 def option(request):
     if request.user.is_authenticated:
-        return render(request, 'cedoc/option.html')
+        data = {}
+        if request.user.is_superuser:
+            form = CategoryUpload(request.POST or None)
+            data['form'] = form
+            data['string'] = ''
+            if request.method == 'POST':
+                if form.is_valid and request.user.is_superuser:
+                    form.save()     # saves new category
+                    data['string'] = 'Nova categoria salva!'
+                    data['form'] = None
+            return render(request, 'cedoc/option.html', data)
+        return render(request, 'cedoc/option.html', data)
     else:
         return HttpResponseForbidden()
 
