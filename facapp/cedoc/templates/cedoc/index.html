@@ -39,7 +39,7 @@
                     <th>Título</th>
                     <th>Formato</th>
                     <th>Dono</th>
-                    <th>Edit</th>
+                    <th>Editar</th>
                 </tr>
                 {% for doc in invalid %}
                 <tr>
@@ -64,7 +64,7 @@
                         <th>Formato</th>
                         <th>Usuário</th>
                         {% if user.is_superuser %}
-                        <th>Delete</th>
+                        <th>Deletar</th>
                         {% endif %}
                     </tr>
                     {% for doc in valid %}
