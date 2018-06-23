@@ -276,3 +276,17 @@ def certificates(request, pk):
             return render(request, 'cedoc/foreign.html', data)
     else:
         return HttpResponseForbidden()
+
+def categories(request):
+    data = {}
+    data['category'] = Categoria.objects.all()
+    if request.user.is_superuser:
+        return render(request, 'cedoc/categories.html', data)
+    else: 
+        return HttpResponseForbidden()
+
+def deleteCategory(request, pk):
+    if request.user.is_superuser:
+        cat = Categoria.objects.get(pk=pk)
+        cat.delete()
+        return redirect('url_categories')

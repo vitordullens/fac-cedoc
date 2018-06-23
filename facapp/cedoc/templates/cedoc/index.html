@@ -62,8 +62,10 @@
                         <th>Data</th>
                         <th>Título</th>
                         <th>Formato</th>
-                        <th>Dono</th>
+                        <th>Usuário</th>
+                        {% if user.is_superuser %}
                         <th>Delete</th>
+                        {% endif %}
                     </tr>
                     {% for doc in valid %}
                     <tr>
@@ -71,7 +73,9 @@
                         <td> {{ doc.title }}</td>
                         <td> {{ doc.fileFormat }}</td>
                         <td> {{ doc.sender }}</td>
+                        {% if user.is_superuser %}
                         <td><button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </table>

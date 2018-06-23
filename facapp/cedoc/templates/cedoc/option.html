@@ -20,10 +20,13 @@
 
             {{form.as_p}}
             <button class="fieldWrapper" type="submit">Salvar</button>
+            <button name="cats" onclick="location.href = '{% url 'url_categories' %}'">Categorias</button>
+            <button onclick="location.href = '{% url 'url_index' %}' ">Voltar</button>
         </form>
     {% elif user.is_superuser %}
         <p>{{ string }}</p>
         <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_option' %}'">Nova Categoria</button>
+        <button name="cats" onclick="location.href = '{% url 'url_categories' %}'">Categorias</button>
     {% endif %}
 
 </body>

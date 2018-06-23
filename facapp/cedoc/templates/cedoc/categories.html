@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Categorias</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+    
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Categorias Audiovisual</h1>
+    <ul>
+        <table>
+            <tr>
+                <th>Categoria</th>
+                <th>Deletar</th>    
+            </tr>
+            {% for cat in category %}
+            <tr>
+                <td>{{ cat.categoria }}</td>
+                <td> <button name="cats" onclick="location.href = '{% url 'url_delete_category' cat.id %}'">Delete</button> </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_option' %}'">Voltar</button>
+    </ul> 
+</body>
+</html>

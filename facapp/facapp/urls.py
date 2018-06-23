@@ -35,6 +35,7 @@ urlpatterns = [
     path('index/<int:pk>', cedocViews.idx, name='url_idx'),
     path('certificates/<int:pk>', cedocViews.certificates, name='url_certificates'),
 
-
-    path('edit/<int:pk>', cedocViews.edit, name='url_edit')
+    path('categories/', cedocViews.categories, name='url_categories'),
+    path('categories/delete/<int:pk>', cedocViews.deleteCategory, name='url_delete_category'),
+    path('edit/<int:pk>', cedocViews.edit, name='url_edit'),
 ]
