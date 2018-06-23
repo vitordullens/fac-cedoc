@@ -30,16 +30,15 @@ def getUnknownModel(request, pk):
 
 def index(request):
     data = {}
-    files = {}
     if request.user.is_authenticated:
         if not request.user.is_superuser:
-            docsOfUser = Doc.objects.filter(sender=request.user.username)
+            not_validated = Doc.objects.filter(sender=request.user.username,accepted=False)
+            validated = Doc.objects.filter(sender=request.user.username,accepted=True)
         else:
-            docsOfUser = Doc.objects.all()
-        for doc in docsOfUser:
-            contribs = list(Contributor.objects.filter(paper=doc))
-            files[doc] = contribs
-        data['files'] = files
+            not_validated = Doc.objects.filter(accepted=False)
+            validated = Doc.objects.filter(accepted=True)
+        data['invalid'] = not_validated
+        data['valid'] = validated
         return render(request, 'cedoc/index.html', data)
     else:
         return redirect(reverse_lazy('login'))
@@ -51,15 +50,8 @@ def edit(request, pk):
     data['form'] = form
     c  = Contributor.objects.filter(paper=pk)
     data['contributors'] = c
-    if request.method == 'POST':
-        if 'val' in request.POST:   # validate form
-            print("Validando o form")
-            if form.is_valid:
-                entry = form.save(commit=False)
-                entry.accepted = True
-                entry.save()
-                return redirect('url_index')
-        else:   # delete contributor
+    if request.method == 'POST' and form.is_valid:
+        if 'del' in request.POST: # deleta contribuidor
             contribPk = request.POST['del']
             try:
                 Contributor.objects.get(pk=contribPk).delete()
@@ -67,6 +59,23 @@ def edit(request, pk):
                 pass    # contribuidor nao existe mais
             # reload page from beginning
             return redirect(reverse_lazy('url_edit', args=[pk]))
+        elif 'add' in request.POST: # adiciona contribuidores
+            return redirect(reverse_lazy('url_contribs', args=[f.pk]))
+        # nao eh contribuidor, entao eh arquivo 
+        # FIXME: Apertar o botão limpar e escolher novo arquivo causa bug.
+        if 'File' in request.FILES and f.File: # novo arquivo sendo inserido no lugar de antigo
+            deleteFile(request, f.pk)
+        try:
+            entry = form.save(commit=False)
+        except ValueError:
+            data['file_error'] = 'Não selecione um novo arquivo e o campo limpar ao mesmo tempo.'
+            return render(request, 'cedoc/edit.html', data)
+        if 'File-clear' in request.POST and not request.FILES: # process file clear request, not yet processed
+            deleteFile(request, entry.pk)
+        if 'val' in request.POST:   # validate entry
+                entry.accepted = True
+        entry.save()
+        return redirect('url_index')
     return render(request, 'cedoc/edit.html', data)
 
 
@@ -121,14 +130,20 @@ def new_entry(request, btn):
     else:
         return HttpResponseForbidden()
 
-def delete(request, pk):
+def deleteFile(request, pk):
+    (f, form) = getUnknownModel(request, pk)
+    try:
+        os.remove(os.path.join(MEDIA_ROOT, str(f.File)))
+    except:
+        pass # silence error when no file is there
+
+def delete(request, pk, noReturn=False):
     if request.user.is_authenticated:
         doc = Doc.objects.get(pk=pk)
-        (f, form) = getUnknownModel(request, pk)
-        if f.File:
-            os.remove(os.path.join(MEDIA_ROOT, str(f.File)))
+        deleteFile(request, pk)
         doc.delete()
-        return redirect('url_index')
+        if not noReturn:
+            return redirect('url_index')
     else:
         return redirect('url_index')
 
@@ -138,7 +153,7 @@ def unboundForms(type, request):
     try:
         i = int(get['i']) + 1
     except:
-        i = 1
+        pass
     forms = []
     for idx in range(i):
         if type == 'contributor':

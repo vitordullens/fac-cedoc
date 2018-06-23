@@ -33,7 +33,8 @@
         {% csrf_token %}
         
         {% for field in form %}
-            {% if field.name != 'File' and field.name != 'url'%}
+            <!-- Special fields -->
+            {% if field.name != 'File' and field.name != 'url' and field.name != 'fileFormat' %}
                 <div class="fieldWrapper">
                     {{ field.errors }}
                     {{ field.label_tag }} {{ field }} 
@@ -45,12 +46,17 @@
         {% endfor %}
 
         <button class="fieldWrapper" type="submit">Confirmar</button>
-        <input type="radio" name="control" onclick="hideAndShow('File')" value="1" checked>Arquivo Dígital</input>
-        <input type="radio" name="control" onclick="hideAndShow('url')" value="2">URL</input>
-        <input type="radio" name="control" onclick="hideAndShow('')" value="3">Arquivo Físico</input>
+        <div id="id_fileFormat">
+                <input type="radio" name="fileFormat" onclick="hideAndShow('File')" value="DG" checked id="id_fileFormat_0" required>Arquivo Dígital</input>
+                <input type="radio" name="fileFormat" onclick="hideAndShow('url')" value="UR" id="id_fileFormat_1" required>URL</input>
+                <input type="radio" name="fileFormat" onclick="hideAndShow('')" value="AN" id="id_fileFormat_2" required>Arquivo Físico</input>
+            </div>
 
         <div id="File" class="fieldWrapper">
             {{ form.File.errors}}
+            {% if file_error %}
+                <h3>{{ file_error }}</h3>
+            {% endif %}            
             {{ form.File.label_tag}} {{ form.File }}
             {% if form.File.help_text %}
                     <i class="fas fa-info-circle help" title="{{ form.File.help_text|safe }}"></i>
@@ -64,18 +70,24 @@
             {% endif %}
         </div>
 
-        <button class="fieldWrapper" name="val" type="submit">Validate</button>
+        <button class="fieldWrapper" name="val" type="submit">Save & Validate</button>
+        <button class="fieldWrapper" name="save" type="submit">Save</button>
     </form>
 
     <form action="{% url 'url_edit' doc.id%}" method="POST">
         {% csrf_token %}
-        
-        <p>Contribuidores</p>
-        <ul>
-        {% for c in contributors %}
-            <li>{{ c.contributor }},{{c.role}} <button class="fieldWrapper" type="submit" name="del" value="{{ c.id }}">X</button></li>
-        {% endfor%}
-        </ul>
+
+        <h3>Contribuidores</h3>
+        {% if contributors %}
+            <ul>
+            {% for c in contributors %}
+                <li>{{ c.contributor }},{{c.role}} <button class="fieldWrapper" type="submit" name="del" value="{{ c.id }}">X</button></li>
+            {% endfor%}
+            </ul>
+        {% else %}
+            <p>Não há contribuidores para este documento.</p>
+        {% endif %}
+        <button class="fieldWrapper" type="submit" name="add">Adicionar Contribuidores</button>
     </form>
     <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button>
 </body>

@@ -7,26 +7,77 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/index.css' %}">
     <title>Index of the page</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+            
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+           
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
     <h1>FAC-APP</h1>
     <ul>
         {% if user.is_authenticated %}
         <h2>Ola, {{ user.username }}!</h2>
-        <h3>
-            Documentos adicionados
-            {% for doc,contributor in files.items%}
-            <li>
-                    <b>Titulo:</b> {{ doc.title }} - <b>Formato:</b> {{ doc.fileFormat }}  - <b>Tipo:</b> {{ doc.fileType}}
-                    <button onclick="location.href = '{% url 'url_edit' doc.id %}' ">Edit</button>
-                    <ul>
-                        {% for c in contributor %}
-                            <li>{{ c.contributor }}, {{ c.role }}</li>
-                        {% endfor %}
-                    </ul>
+        <h3> Documentos <b>não</b> validados </h3>
+            
+            {% if invalid %}
+            <table>
+                <tr>
+                    <th>Data</th>
+                    <th>Título</th>
+                    <th>Formato</th>
+                    <th>Dono</th>
+                    <th>Edit</th>
+                </tr>
+                {% for doc in invalid %}
+                <tr>
+                    <td> {{ doc.submissionDate }}</td>
+                    <td> {{ doc.title }}</td>
+                    <td> {{ doc.fileFormat }}</td>
+                    <td> {{ doc.sender }}</td>
+                    <td><button onclick="location.href = '{% url 'url_edit' doc.id %}'">Edit</button></td>
+                </tr>
+                {% endfor %}
+                </table>
+            {% else%}
+                <p>Nenhum documento inválido ainda.</p>
+            {% endif%}
 
-            </li>
-            {% endfor %}
+            <h3> Documentos validados </h3>
+            {% if valid %}
+                <table>
+                    <tr>
+                        <th>Data</th>
+                        <th>Título</th>
+                        <th>Formato</th>
+                        <th>Dono</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for doc in valid %}
+                    <tr>
+                        <td> {{ doc.submissionDate }}</td>
+                        <td> {{ doc.title }}</td>
+                        <td> {{ doc.fileFormat }}</td>
+                        <td> {{ doc.sender }}</td>
+                        <td><button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>Nenhum documento validado ainda</p>
+            {% endif %}
             <br>
             <button onclick="location.href = '{% url 'url_option' %}' ">Adicionar</button>
             <button onclick="location.href = '{% url 'logout' %}' ">Sair</button>
@@ -34,8 +85,7 @@
             <h2>Faça o login :)</h2>
             <button onclick="location.href = '{% url 'login' %}' ">Entrar</button>
             <button onclick="location.href = '{% url 'url_signup' %}' ">Registrar-se</button>
-        {% endif %}
-        </h3>    
+        {% endif %}   
         
     </ul>
     
