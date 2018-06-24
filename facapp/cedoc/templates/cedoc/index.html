@@ -24,6 +24,15 @@
             background-color: #dddddd;
         }
     </style>
+
+    <script>
+        function myConfirm(str, id){
+            if (confirm(str))
+                var url = "{% url 'url_delete' 0 %}";
+                url = url.replace('0', id)
+                location.href = url
+        }
+    </script>
 </head>
 <body>
     <h1>FAC-APP</h1>
@@ -74,7 +83,7 @@
                         <td> {{ doc.fileFormat }}</td>
                         <td> {{ doc.sender }}</td>
                         {% if user.is_superuser %}
-                        <td><button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button></td>
+                        <td><button onclick="myConfirm('Certeza que quer deletar {{ doc.title }}?', {{ doc.id }})">Deletar</button></td>
                         {% endif %}
                     </tr>
                     {% endfor %}

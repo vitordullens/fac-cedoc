@@ -20,6 +20,11 @@
                 if(str != '')
                     document.getElementById(str).classList.remove('hidden');
             }
+
+            function myConfirm(str){
+                if (confirm(str))
+                    location.href = "{% url 'url_delete' doc.id %}";
+            }
         </script>
     
         <style>
@@ -89,7 +94,7 @@
         {% endif %}
         <button class="fieldWrapper" type="submit" name="add">Adicionar Contribuidores</button>
     </form>
-    <button onclick="location.href = '{% url 'url_delete' doc.id %}' ">Deletar</button>
+    <button onclick="myConfirm('Certeza que quer deletar {{ doc }} ?')">Deletar</button>
     <button onclick="location.href = '{% url 'url_index' %}' ">Voltar</button>
 </body>
 </html>
