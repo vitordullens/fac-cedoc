@@ -1,0 +1,18 @@
+@font-face {
+    font-family: fonteUnb;
+    src: url(/fonts/UnB_Pro_Regular.otf);
+}
+
+.navbar{
+    border-radius: 0px;
+    background-color: #1B3F79;
+    /*font-family: 'fonteUnb';*/
+    border-style: none;
+
+
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #1B3F79;
+}
