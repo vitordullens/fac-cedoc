@@ -30,16 +30,31 @@
         <table>
             <tr>
                 <th>Categoria</th>
-                <th>Deletar</th>    
+                {% if user.is_superuser %}
+                <th>Deletar</th>  
+                {% endif %}  
             </tr>
             {% for cat in category %}
             <tr>
                 <td>{{ cat.categoria }}</td>
+                 {% if user.is_superuser %}
                 <td> <button name="cats" onclick="location.href = '{% url 'url_delete_category' cat.id %}'">Delete</button> </td>
+                 {% endif %}
             </tr>
             {% endfor %}
         </table>
-        <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_option' %}'">Voltar</button>
+
+         {% if string == "" %}
+        <p>Adicionar nova Categoria</p>
+        <form action="{% url 'url_categories' %}" method="POST">
+            {% csrf_token %} {{form.as_p}}
+            <button class="fieldWrapper" type="submit">Salvar</button>
+        </form>
+        {% elif user.is_superuser %}
+        <p>{{ string }}</p>
+        <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_categories' %}'">Nova Categoria</button>
+        {% endif %}
+
     </ul> 
 </body>
 </html>

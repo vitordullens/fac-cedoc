@@ -28,9 +28,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class=""><a href="{% url 'url_option' %}"><span class="glyphicon glyphicon-file"></span>&nbsp; Adicionar Documento</a></li>
+                <!-- 
                 <li class=""><a href="#"><span class="glyphicon glyphicon-send"></span>&nbsp; Itens Enviados</a></li>
                 <li class=""><a href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp; Itens Aprovados</a></li>
-                <li class=""><a href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp; Adicionar Catagoria</a></li>
+                -->
+
+                <li class=""><a href="{% url 'url_categories' %}"><span class="glyphicon glyphicon-plus"></span>&nbsp; Catagorias Áudiovisual</a></li>
+
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li id="name_user_navbar"><a class="desabilitado" href="asdfasdf">Ola, {{ user.username }}</a></li>

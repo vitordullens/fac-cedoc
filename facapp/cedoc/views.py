@@ -82,16 +82,7 @@ def edit(request, pk):
 def option(request):
     if request.user.is_authenticated:
         data = {}
-        if request.user.is_superuser:
-            form = CategoryUpload(request.POST or None)
-            data['form'] = form
-            data['string'] = ''
-            if request.method == 'POST':
-                if form.is_valid and request.user.is_superuser:
-                    form.save()     # saves new category
-                    data['string'] = 'Nova categoria salva!'
-                    data['form'] = None
-            return render(request, 'cedoc/option.html', data)
+        
         return render(request, 'cedoc/option.html', data)
     else:
         return HttpResponseForbidden()
@@ -281,9 +272,16 @@ def categories(request):
     data = {}
     data['category'] = Categoria.objects.all()
     if request.user.is_superuser:
-        return render(request, 'cedoc/categories.html', data)
-    else: 
-        return HttpResponseForbidden()
+        form = CategoryUpload(request.POST or None)
+        data['form'] = form
+        data['string'] = ''
+        if request.method == 'POST':
+            if form.is_valid and request.user.is_superuser:
+                form.save()     # saves new category
+                data['string'] = 'Nova categoria salva!'
+                data['form'] = None
+    return render(request, 'cedoc/categories.html', data)
+
 
 def deleteCategory(request, pk):
     if request.user.is_superuser:
