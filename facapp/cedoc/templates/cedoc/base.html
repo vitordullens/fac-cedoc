@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block cabecalho %}
+    {% endblock %}
+    <link rel="stylesheet" href="{%static  'cedoc/css/bootstrap.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static  'cedoc/css/navbar.css'%}">
+</head>
+<body>
+    <!--Menu de navegação da aplicação-->
+    <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'url_index' %}">
+                  <img src="{%static 'cedoc/image/logo_menu.svg'%}">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class=""><a href="{% url 'url_option' %}"><span class="glyphicon glyphicon-file"></span>&nbsp; Adicionar Documento</a></li>
+                <li class=""><a href="#"><span class="glyphicon glyphicon-send"></span>&nbsp; Itens Enviados</a></li>
+                <li class=""><a href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp; Itens Aprovados</a></li>
+                <li class=""><a href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp; Adicionar Catagoria</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li id="name_user_navbar"><a class="desabilitado" href="asdfasdf">Ola, {{ user.username }}</a></li>
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-off"></span>&nbsp; Sair</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    {% block conteudo %}
+    {% endblock%}
+
+    <script src="{%static 'cedoc/js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{%static 'cedoc/js/bootstrap.js'%}"></script>
+</body>
+</html>

@@ -1,85 +1,16 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{%static  'cedoc/css/bootstrap.css'%}">
+{% extends 'cedoc/base.html'%}
+
+{%block cabecalho %}
+    {% load staticfiles %}
+    <title>Home</title>
     <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/index.css' %}">
-    <link rel="stylesheet" type="text/css" href="{%static  'cedoc/css/navbar.css'%}">
-    <title>Index of the page</title>
+{%endblock%}
 
-    <script>
-        function myConfirm(str, id){
-            if (confirm(str))
-                var url = "{% url 'url_delete' 0 %}";
-                url = url.replace('0', id)
-                location.href = url
-        }
-    </script>
-</head>
-<body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-           <!-- Header -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'url_index' %}">
-                    <img src="{%static 'cedoc/image/logo_menu.svg'%}" style="width: 35%">
-                </a>
-            </div>
-            <!-- Items -->
-            <div class="collapse navbar-collapse" id="topNavBar">
-                <ul class="nav navbar-nav">
-                    <li class="">
-                        <a href="{% url 'url_option' %}">
-                            <span class="glyphicon glyphicon-file"></span> Adicionar Documento
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-send"></span> Itens Enviados</a>
-                    </li>
-                     <li class="">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-ok"></span> Itens Aprovados</a>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-plus"></span> Adicionar Categoria
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-info-sign"></span> Sobre</a>
-                    </li>
-
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active desabilitado">
-                        <a href="#">Ola, {{ user.username }}</a>
-                    </li>
-                <li class="">
-                    <a href="{% url 'logout' %}">
-                        <span class="glyphicon glyphicon-off"></span>&nbsp; Sair
-                    </a>
-                </li>
-            </ul>
-            </div>
-        </div>
-    </nav>
-
-
+{% block conteudo %}
      <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-12 corpo">
-               <img id="ajuste_logo_sistema" src="{%static 'cedoc/image/logo_fac2.svg'%}" class="img-responsive">
+               <img id="ajuste_logo_sistema" src="{%static 'cedoc/image/logo_fac_app.svg'%}" class="img-responsive">
                 <ul>
                     {% if user.is_authenticated %}
 
@@ -135,8 +66,6 @@
                         {% else %}
                             <p>Nenhum documento validado ainda</p>
                         {% endif %}
-                        <br>
-                        <button onclick="location.href = '{% url 'url_option' %}' ">Adicionar</button>
                     {% else %}
                         <h2>Faça o login :)</h2>
                         <button onclick="location.href = '{% url 'login' %}' ">Entrar</button>
@@ -148,16 +77,4 @@
             </div>
         </div>
      </div>
-
-
-
-
-
-
-
-
-
-    <script src="{%static 'cedoc/js/jquery-3.2.1.min.js'%}"></script>
-    <script src="{%static 'cedoc/js/bootstrap.js'%}"></script>
-</body>
-</html>
+{% endblock %}

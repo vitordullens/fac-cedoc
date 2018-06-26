@@ -7,20 +7,12 @@ html, body{
   margin: 0;
   padding: 0;
 }
-a:link {
- text-decoration:none;
-}
+
 .corpo{
     padding-top: 0%;
     color: white;
 }
 
-.desabilitado{
-    pointer-events: none;
-}
-button{
-    color: black;
-}
 
  table {
             font-family: arial, sans-serif;
@@ -37,7 +29,6 @@ button{
         tr:nth-child(even) {
             background-color: #dddddd;
         }
-
 
 
 #ajuste_logo_sistema{
