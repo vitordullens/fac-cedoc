@@ -39,7 +39,7 @@ class Doc(models.Model):
     publisher = models.CharField('Publisher', max_length=150, default="FAC-UnB")
     # TODO: create options specific for each kind of document
     coverage = models.CharField('Coverage', max_length=2, default='R', choices=coverage())
-    rights = models.CharField('Rights', max_length=100, default='Free Access', help_text="Access Rights")
+    rights = models.CharField('Rights', max_length=100, default='Creative Commons', help_text="Access Rights")
     source = models.CharField('Source', default='Faculdade de Comunicação - FAC' , max_length=100)
     date = models.DateField('Document Date', default=django.utils.timezone.now)
     fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG', help_text='Escolha apenas 1 opção')

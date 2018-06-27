@@ -14,10 +14,10 @@
 4. O que deve estar instalado na sua virutalenv:
 
 ```
-Django==2.0.6
-Pillow==5.1.0
-pkg-resources==0.0.0
-pytz==2018.4
+Django == 2.0.6
+Pillow == 5.1.0
+pkg-resources == 0.0.0
+pytz == 2018.4
 ```
 
 5. Para instalar estes utilize o comando `pip install <nome>`
@@ -27,9 +27,9 @@ pytz==2018.4
 - Rodar o servidor: `python manage.py runserver` 
 
 - Fazer migrações para o banco de dados: `python manage.py makemigrations`
+    - Necessário quando os `models` são modificados para indicar ao banco que mudanças são necessárias.
 
 - Conectar as migrações com o banco: `python manage.py migrate` 
 
 - Criar super usuário: `python manage.py createsuperuser`
-
-- Criar uma aplicação: `python manage.py startapp <name>`
+    - obs.: o superusuário é o único que não precisa de um e-mail da UnB. Ele deve ser o usuário cedoc, com o email do cedoc.

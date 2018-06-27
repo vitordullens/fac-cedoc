@@ -10,7 +10,7 @@ html, body{
 
 .corpo{
     padding-top: 0%;
-    color: white;
+    color: blanchedalmond;
 }
 
 
@@ -20,14 +20,18 @@ html, body{
             width: 80%;
         }
 
-        td, th {
-            border: 1px solid #dddddd;
+        th {
+            background-color: darkblue;
+            border: 1px solid blanchedalmond;
             text-align: left;
             padding: 8px;
         }
 
+        tr:nth-child(odd) {
+          background-color: darkblue;
+        }
         tr:nth-child(even) {
-            background-color: #168740;
+            background-color: darkgreen;
         }
 
 

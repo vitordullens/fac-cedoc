@@ -2673,6 +2673,7 @@ input[type="search"] {
   margin-top: 0;
   margin-left: 10px;
 }
+
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],
 input[type="radio"].disabled,

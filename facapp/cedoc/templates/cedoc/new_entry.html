@@ -3,8 +3,10 @@
 {%block cabecalho %}
     {% load staticfiles %}
     <title>Novo Registro</title>
+    <link rel="stylesheet" href="{%static  'cedoc/css/bootstrap.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/new_entry.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
     <script>
         function hideAndShow(str){
             // clear inputs
@@ -43,7 +45,7 @@
                                     {% if field.name != 'File' and field.name != 'url'  and field.name != 'fileFormat' %}
                                         <div class="fieldWrapper">
                                             {{ field.errors }}
-                                            {{ field.label_tag }} {{ field }}
+                                            <p>{{ field.label_tag }}</p> {{ field }}
                                             {% if field.help_text %}
                                             <i class="fas fa-info-circle help" title="{{ field.help_text|safe }}"></i>
                                             {% endif %}
@@ -52,10 +54,11 @@
                                 {% endfor %}
 
                                 <h4>Escolha apenas 1 opção</h4>
-                                <div id="id_fileFormat">
-                                    <input type="radio" name="fileFormat" onclick="hideAndShow('File')" value="DG" checked id="id_fileFormat_0" required>Arquivo Dígital</input>
-                                    <input type="radio" name="fileFormat" onclick="hideAndShow('url')" value="UR" id="id_fileFormat_1" required>URL</input>
-                                    <input type="radio" name="fileFormat" onclick="hideAndShow('')" value="AN" id="id_fileFormat_2" required>Arquivo Físico</input>
+                                <div id="id_fileFormat" class="btn-group">
+                                    <label for="id_fileFormat_0" class="radio-inline">
+                                    <input class="radio-inline" type="radio" name="fileFormat" onclick="hideAndShow('File')" value="DG" id="id_fileFormat_0" checked required>Arquivo Digital</label>
+                                    <input class="radio-inline" type="radio" name="fileFormat" onclick="hideAndShow('url')" value="UR" id="id_fileFormat_1" required>URL</input>
+                                    <input class="radio-inline" type="radio" name="fileFormat" onclick="hideAndShow('')" value="AN" id="id_fileFormat_2" required>Arquivo Físico</input>
                                 </div>
                                 <div id="File" class="fieldWrapper">
                                     {{ form.File.errors}}
@@ -81,7 +84,9 @@
                                 </ul>
                                 {% endif %}
                                 <button class="fieldWrapper" type="submit">Confirmar</button>
+
                         </form>
+
                             <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_option' %}'">Voltar</button>
 
 
