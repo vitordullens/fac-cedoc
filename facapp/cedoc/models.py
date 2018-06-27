@@ -79,7 +79,7 @@ class CampusReporter(Doc):
     File = models.FileField(upload_to='texts/reporter/', blank=True, validators=[validate_CampusReporter])
 
 class AudioVisual(Doc):
-    dateProduction = models.DateField('Production Field', default=django.utils.timezone.now)
+    dateProduction = models.DateField('Production Date', default=django.utils.timezone.now)
     material = models.CharField('Original Material', max_length=100, blank=True)
     country = models.CharField('Country of Production', max_length=50, default='Brasil')
     state = models.CharField('Country of Production', max_length=50, default='DF')
