@@ -1,0 +1,36 @@
+.mediaWrapper {
+    width: 100%;
+}
+
+html, body{
+    background: url(background/painel_final_fundo.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .corpo{
+      padding-top: 0%;
+      color: white;
+  }
+
+  #ajuste_logo_sistema{
+    display: block;
+    margin: 0 auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    max-width: 20%;
+  }
+  #ajuste_icone{
+    width: 40%;
+  }
+  #ajuste_menu{
+    display: block;
+    margin: auto;
+    padding-top: 8%;
+    padding-bottom: 2%;
+    width: 85%;
+  }
