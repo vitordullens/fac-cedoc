@@ -30,6 +30,3 @@ pytz == 2018.4
     - Necessário quando os `models` são modificados para indicar ao banco que mudanças são necessárias.
 
 - Conectar as migrações com o banco: `python manage.py migrate` 
-
-- Criar super usuário: `python manage.py createsuperuser`
-    - obs.: o superusuário é o único que não precisa de um e-mail da UnB. Ele deve ser o usuário cedoc, com o email do cedoc.

@@ -8,6 +8,7 @@ O sistema foi desenvolvido inicialmente para a disciplina Desenvolvimento de Apl
         - [Para usuários comuns (professores e alunos da FAC)](#para-usu%C3%A1rios-comuns-professores-e-alunos-da-fac)
         - [Para usuários do Cedoc](#para-usu%C3%A1rios-do-cedoc)
         - [Dos Tipos de Arquivos Aceitos](#dos-tipos-de-arquivos-aceitos)
+        - [Importante:](#importante)
     - [Interfaces do Sistema](#interfaces-do-sistema)
         - [Menu de Login](#menu-de-login)
         - [Cadastro de Novo Usuário](#cadastro-de-novo-usu%C3%A1rio)
@@ -33,6 +34,9 @@ O sistema foi desenvolvido inicialmente para a disciplina Desenvolvimento de Apl
 ### Dos Tipos de Arquivos Aceitos
 Os arquivos aceitos até agora são arquivos `.pdf` para Jornal Campus e Revista Compus Repórter. Para a modalidade audiovisual os arquivos aceitos são `.mp3` e `.mp4`. Se você precisa enviar um tipo de arquivo que não está entre esses deve pedir ao Cedoc para disponibilizar esta nova extensão.
 
+### Importante: 
+Se vocẽ está dentro do sistema, i.e. já fez o seu login, lembre-se de fazer o **logout** antes de fechar o navegador. Se você não fizer isso continuará dentro do sistema, e qualquer pessoa que use aquele computador poderá enviar arquivos ou deletar arquivos que você enviou.
+
 ## Interfaces do Sistema
 ### Menu de Login
 
@@ -51,7 +55,7 @@ O e-mail utilizado **precisa** ser um e-mail da UnB válido.
 
 ### Menu Principal
 
-![Index](assets/indez.png)
+![Index](assets/index.png)
 
 Aqui no menu principal os usuários externos ao Cedoc tem a visão dos documentos que foram enviados por eles, separados entre os documentos validados pelo pessoal do Cedoc e os não validados. OS documentos ainda não validados estão disponíveis para serem editados. Os funcionários do Cedoc podem ver *todos* os arquivos enviados (não apenas os enviados por eles). Além disso podem deletar os arquivos já validados depois que eles foram movidos para o repositório apropriado.
 
