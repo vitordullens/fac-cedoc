@@ -126,6 +126,24 @@
         <button class="fieldWrapper" type="submit" name="add">Adicionar Contribuidores</button>
     </form>
 
+    {% if jornal %}
+        <form action="{% url 'url_edit' doc.id%}" method="POST">
+                {% csrf_token %}
+        
+                <h3>Índice</h3>
+                {% if idx %}
+                    <ul>
+                    {% for i in idx %}
+                        <li>{{ i.materia }},{{ i.author }} <button class="fieldWrapper" type="submit" name="del_idx" value="{{ i.id }}">X</button></li>
+                    {% endfor%}
+                    </ul>
+                {% else %}
+                    <p>Não há indice para este documento.</p>
+                {% endif %}
+                <button class="fieldWrapper" type="submit" name="add_idx">Adicionar Índice</button>
+        </form>
+    {% endif %}
+
     <script>
         var date = "{{ form.date.value }}".split(" ");
         var day = date[0]

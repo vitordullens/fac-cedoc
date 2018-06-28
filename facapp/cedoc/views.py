@@ -7,7 +7,7 @@ from django.http import HttpResponseForbidden
 from facapp.settings import MEDIA_ROOT
 
 from .forms import ContribUpload, JournalUpload, ReporterUpload, AudioVisualUpload, IndexUpload, CertificateUpload, CategoryUpload
-from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc, Categoria
+from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc, Categoria, Index
 
 # Functions
 def getUnknownModel(request, pk):
@@ -51,9 +51,13 @@ def edit(request, pk):
     if isinstance(f, AudioVisual):
         data['cat'] = Categoria.objects.all()
         data['checked_cat'] = f.categories.all()
+    if isinstance(f, CampusJournal):
+        data['idx'] = Index.objects.filter(paper=pk)
+        data['jornal'] = "jornal"
     c  = Contributor.objects.filter(paper=pk)
     data['contributors'] = c
     if request.method == 'POST' and form.is_valid:
+        # Contribuidor
         if 'del' in request.POST: # deleta contribuidor
             contribPk = request.POST['del']
             try:
@@ -64,13 +68,27 @@ def edit(request, pk):
             return redirect(reverse_lazy('url_edit', args=[pk]))
         elif 'add' in request.POST: # adiciona contribuidores
             return redirect(reverse_lazy('url_contribs', args=[f.pk]))
-        # nao eh contribuidor, entao eh arquivo 
+
+        # Indice - apenas se for jornal campus
+        if isinstance(f, CampusJournal):
+            if 'del_idx' in request.POST: # deleta índice
+                indexPk = request.POST['del_idx']
+                try:
+                    Index.objects.get(pk=indexPk).delete()
+                except:
+                    pass    # contribuidor nao existe mais
+                # reload page from beginning
+                return redirect(reverse_lazy('url_edit', args=[pk]))
+            elif 'add_idx' in request.POST: # adiciona contribuidores
+                return redirect(reverse_lazy('url_idx', args=[f.pk]))
+
+        # Arquivo 
         if 'File' in request.FILES and 'File-clear' in request.POST: # novo arquivo sendo inserido no 
             data['file_error'] = 'Não selecione um novo arquivo e o campo limpar ao mesmo tempo.'
             return render(request, 'cedoc/edit.html', data)
         elif 'File' in request.FILES and f.File:
             deleteFile(request, f.pk)
-            
+
         entry = form.save(commit=False)
         if 'File-clear' in request.POST : # process file clear request, not yet processed
             deleteFile(request, entry.pk)

@@ -67,7 +67,7 @@ class ContribUpload(ModelForm):
         model = Contributor
         fields = ['contributor', 'role']
         widgets = {
-            'role' : Select(choices=ROLES)
+            'role' : Select(choices=ROLES, attrs={'placeholder':"Selecione Papel"})
         }
 
 class IndexUpload(ModelForm):

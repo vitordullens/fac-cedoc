@@ -13,7 +13,7 @@
     <h2>Adicionar {{ item }} </h2> 
     <h2>Atenção! Coloque o número correto de {{ item }} antes de começar a preencher.</h2>
 
-    <form action="{% url 'url_contribs' pk %}" method="POST">
+    <form action="{% url return pk %}" method="POST">
         {% csrf_token %}
 
         {% for contrib in forms%}
