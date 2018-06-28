@@ -41,7 +41,7 @@ class Doc(models.Model):
     coverage = models.CharField('Coverage', max_length=2, default='R', choices=coverage())
     rights = models.CharField('Rights', max_length=100, default='Creative Commons', help_text="Access Rights")
     source = models.CharField('Source', default='Faculdade de Comunicação - FAC' , max_length=100)
-    date = models.DateField('Document Date', default=django.utils.timezone.now)
+    date = models.DateField('Document Date', default=django.utils.timezone.now, help_text="Use formato dd/mm/AAAA")
     fileFormat = models.CharField('Media Format', max_length=2, choices=getFileFormat(), default='DG', help_text='Escolha apenas 1 opção')
     language = models.CharField('Language', max_length=50, default='Português')
     submissionDate = models.DateField(auto_now_add=True)
@@ -86,7 +86,7 @@ class AudioVisual(Doc):
     city = models.CharField('Country of Production', max_length=50, default='Brasília')
     string = str(country) + ',' + str(state) + ',' + str(city)
     locationProduction = models.CharField('Location of Production', max_length=200, default=string)
-    duration = models.DurationField('Video Duration', default=datetime.timedelta(0))
+    duration = models.DurationField('Video Duration', default=datetime.timedelta(0), help_text="Use formato hh:mm:ss")
     categories = models.ManyToManyField(Categoria)
     File = models.FileField(upload_to='video/', blank=True, validators=[validate_AudioVisual])
 

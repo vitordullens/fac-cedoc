@@ -16,6 +16,7 @@ Para informações mais detalhadas sobre a aplicação acesse a pasta [docs](doc
 - [ ] Fazer a documentação(scrum);
 - [X] Fazer manual de uso;
     - [ ] Revisar manual de uso.
+    - [ ] Adicionar Diagrama de models.
 - [X] Ajustar pagina de categorias;
 - [ ] Resolver problema da data (não aparece a data do documento na view edit).
 
