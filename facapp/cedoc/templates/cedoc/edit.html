@@ -51,6 +51,7 @@
     <h2>Editar {{ doc }}</h2>
     <button onclick="myConfirm('Certeza que quer deletar {{ doc }} ?')">Deletar</button>
     <button onclick="location.href = '{% url 'url_index' %}' ">Voltar</button>
+
     <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         
@@ -110,38 +111,56 @@
         <button class="fieldWrapper" name="save" type="submit">Save</button>
     </form>
 
-    <form action="{% url 'url_edit' doc.id%}" method="POST">
-        {% csrf_token %}
-
-        <h3>Contribuidores</h3>
-        {% if contributors %}
+    <h3>Contribuidores</h3>
+    {% if contributors %}
+        <form action="{% url 'url_edit' doc.id%}" method="POST">
+                {% csrf_token %}
             <ul>
             {% for c in contributors %}
                 <li>{{ c.contributor }},{{c.role}} <button class="fieldWrapper" type="submit" name="del" value="{{ c.id }}">X</button></li>
             {% endfor%}
             </ul>
-        {% else %}
-            <p>Não há contribuidores para este documento.</p>
-        {% endif %}
-        <button class="fieldWrapper" type="submit" name="add">Adicionar Contribuidores</button>
-    </form>
-
-    {% if jornal %}
-        <form action="{% url 'url_edit' doc.id%}" method="POST">
-                {% csrf_token %}
-        
-                <h3>Índice</h3>
-                {% if idx %}
-                    <ul>
-                    {% for i in idx %}
-                        <li>{{ i.materia }},{{ i.author }} <button class="fieldWrapper" type="submit" name="del_idx" value="{{ i.id }}">X</button></li>
-                    {% endfor%}
-                    </ul>
-                {% else %}
-                    <p>Não há indice para este documento.</p>
-                {% endif %}
-                <button class="fieldWrapper" type="submit" name="add_idx">Adicionar Índice</button>
         </form>
+    {% else %}
+            <p>Não há contribuidores para este documento.</p>
+    {% endif %}
+        <button class="fieldWrapper" onclick="location.href = '{% url 'url_contribs' doc.pk %}'">Adicionar Contribuidores</button>
+        <p>Mudanças não salvas serão perdidas.</p>
+
+    {% if type == 'jornal' %}
+        <h3>Índice</h3>
+        {% if idx %}
+        <form action="{% url 'url_edit' doc.id%}" method="POST">
+            {% csrf_token %}
+            <ul>
+            {% for i in idx %}
+            <li>{{ i.materia }},{{ i.author }} <button class="fieldWrapper" type="submit" name="del_idx" value="{{ i.id }}">X</button></li>
+            {% endfor%}
+            </ul>
+        </form>
+        {% else %}
+            <p>Não há indice para este documento.</p>
+        {% endif %}
+            <button class="fieldWrapper" onclick="location.href = '{% url 'url_idx' doc.pk %}'">Adicionar Índice</button>
+            <p>Mudanças não salvas serão perdidas.</p>
+    {% endif %}
+
+    {% if type == 'audiovisual' %}
+        <h3>Certificados</h3>
+        {% if certificates %}
+        <form action="{% url 'url_edit' doc.id%}" method="POST">
+            {% csrf_token %}
+            <ul>
+            {% for c in certificates %}
+            <li>{{ c.certificate }},{{ c.date }} <button class="fieldWrapper" type="submit" name="del_cer" value="{{ c.id }}">X</button></li>
+            {% endfor%}
+            </ul>
+        </form>
+        {% else %}
+            <p>Não há certificados para este documento.</p>
+        {% endif %}
+            <button class="fieldWrapper" onclick="location.href = '{% url 'url_certificates' doc.pk %}'">Adicionar Certificado</button>
+            <p>Mudanças não salvas serão perdidas.</p>
     {% endif %}
 
     <script>

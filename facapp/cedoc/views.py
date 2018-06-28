@@ -7,7 +7,7 @@ from django.http import HttpResponseForbidden
 from facapp.settings import MEDIA_ROOT
 
 from .forms import ContribUpload, JournalUpload, ReporterUpload, AudioVisualUpload, IndexUpload, CertificateUpload, CategoryUpload
-from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc, Categoria, Index
+from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc, Categoria, Index, Certificate
 
 # Functions
 def getUnknownModel(request, pk):
@@ -43,6 +43,25 @@ def index(request):
     else:
         return redirect(reverse_lazy('login'))
 
+def handleEditExtra(request, kind, id):
+    if kind == 'contributor':
+        try:
+            Contributor.objects.get(pk=id).delete()
+        except:
+            return "Contributor not found"
+    elif kind == 'index':
+        try:
+            Index.objects.get(pk=id).delete()
+        except:
+            return "Index not found"
+    elif kind == 'certificate':
+        try:
+            Certificate.objects.get(pk=id).delete()
+        except:
+            return "Certificate not found"
+    else:
+        return "Operation not successful"
+
 def edit(request, pk):
     (f, form) = getUnknownModel(request, pk)
     data = {}
@@ -51,37 +70,25 @@ def edit(request, pk):
     if isinstance(f, AudioVisual):
         data['cat'] = Categoria.objects.all()
         data['checked_cat'] = f.categories.all()
+        data['certificates'] = Certificate.objects.filter(paper=pk)
+        data['type'] = "audiovisual"
     if isinstance(f, CampusJournal):
         data['idx'] = Index.objects.filter(paper=pk)
-        data['jornal'] = "jornal"
+        data['type'] = "jornal"
     c  = Contributor.objects.filter(paper=pk)
     data['contributors'] = c
     if request.method == 'POST' and form.is_valid:
         # Contribuidor
         if 'del' in request.POST: # deleta contribuidor
-            contribPk = request.POST['del']
-            try:
-                Contributor.objects.get(pk=contribPk).delete()
-            except:
-                pass    # contribuidor nao existe mais
-            # reload page from beginning
+            handleEditExtra(request, 'contributor', request.POST['del'])
             return redirect(reverse_lazy('url_edit', args=[pk]))
-        elif 'add' in request.POST: # adiciona contribuidores
-            return redirect(reverse_lazy('url_contribs', args=[f.pk]))
-
         # Indice - apenas se for jornal campus
-        if isinstance(f, CampusJournal):
-            if 'del_idx' in request.POST: # deleta índice
-                indexPk = request.POST['del_idx']
-                try:
-                    Index.objects.get(pk=indexPk).delete()
-                except:
-                    pass    # contribuidor nao existe mais
-                # reload page from beginning
-                return redirect(reverse_lazy('url_edit', args=[pk]))
-            elif 'add_idx' in request.POST: # adiciona contribuidores
-                return redirect(reverse_lazy('url_idx', args=[f.pk]))
-
+        elif isinstance(f, CampusJournal) and 'del_idx' in request.POST:
+            handleEditExtra(request, 'index', request.POST['del_idx'])
+            return redirect(reverse_lazy('url_edit', args=[pk]))
+        elif isinstance(f, AudioVisual) and 'del_cer' in request.POST:
+            handleEditExtra(request, 'certificate', request.POST['del_cer'])
+            return redirect(reverse_lazy('url_edit', args=[pk]))
         # Arquivo 
         if 'File' in request.FILES and 'File-clear' in request.POST: # novo arquivo sendo inserido no 
             data['file_error'] = 'Não selecione um novo arquivo e o campo limpar ao mesmo tempo.'
