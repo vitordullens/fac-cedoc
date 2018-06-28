@@ -1,6 +1,18 @@
 # Manual do Desenvolvedor para o Sistema Fac App
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
+- [Manual do Desenvolvedor para o Sistema Fac App](#manual-do-desenvolvedor-para-o-sistema-fac-app)
+- [Overview](#overview)
+    - [`cedoc`](#cedoc)
+    - [`accounts`](#accounts)
+    - [`django-admin`](#django-admin)
+- [Ambiente de Produção vs Ambiente de Desenvolvimento](#ambiente-de-produ%C3%A7%C3%A3o-vs-ambiente-de-desenvolvimento)
+- [Superusuários](#superusu%C3%A1rios)
+    - [Poderes do Superusuário](#poderes-do-superusu%C3%A1rio)
+- [Models - Banco de Dados](#models---banco-de-dados)
+    - [Esquema das tabelas](#esquema-das-tabelas)
+    - [Sincronizando o Banco de Dados](#sincronizando-o-banco-de-dados)
+
 O sistema foi implementado usando a linguagem Python, suportado pelo framework Django. Esse framework é voltado para desenvolvimento web e já vem com inúmeras capacidades. Usamos a versão 2.0 do Django nesta aplicação. A [documentação oficial](https://docs.djangoproject.com/pt-br/2.0/) do Django é muito completa. Ela será sua melhor amiga para este projeto.
 
 Recomendamos ler e entender a estrutura de arquivos do Django antes de prosseguir no entendimento do sistema. Além disso, caso você esteja aqui, estamos considerando que o sistema já esteja instalado na sua máquina (seja ela de produção ou desenvolvimento). Se esse não for o caso, siga primeiro [estas instruções](instructions.md).
@@ -70,3 +82,25 @@ Você terá que preencher os dados do usuário - nome, e-mail e senha. Sugerimos
 O superusuário é o único usuário capaz de acessar o Django Admin (`<base_url>/admin`). Do Django Admin ele terá uma visão de todos os modelos cadastrados na aplicação Django Admin. Esses incluem os modelos do app `cedoc`, mas principalmente os usuários do sistema. Ou seja, **apenas o superuser pode deletar usuários**.
 
 Além disso apenas o superusuário pode validar os documentos enviados para o Cedoc através do sistema, e criar/deletar categorias.
+
+# Models - Banco de Dados
+
+Usamos um banco de dados relacional para modelar nossas entidades. As definições das tabelas estão em `models.py`. Ao se conectar com o banco de dados e fazer as migrações as tabelas correspondentes serão criadas. Note que existem dois arquivos `models.py` diferentes, um pertencente ao app `cedoc` e outro do app `accounts`. Apesar de estarem todas no mesmo banco de dados, as tabelas não são relacionadas, e por isso estão assim.
+
+## Esquema das tabelas
+
+Vamos dar mais detalhes às tabelas relacionadas ao app `cedoc`. Elas seguem o modelo relacional da figura abaixo.
+
+O modelo é relativamente simples, tempo uma entidade `Doc` principal, que é especializada pelas entidades `Audiovisual`, `Campus Repórter` e `Jornal Campus`. As entidades além dessas são as que possuem alguma relação com os modelos. 
+
+![Modelo Relacional](assets/models.png)
+
+## Sincronizando o Banco de Dados
+
+Existem dois comandos importantes no Django para mexer com o banco de dados. Para mais informações procure a documentação oficial.
+
+1. Fazer migrações para o banco de dados: `python manage.py makemigrations`
+    - Necessário quando os `models` são modificados para indicar ao banco que mudanças são necessárias. Esse comando gera os arquivos `.sql` que fazem as alterações no banco.
+
+2. Conectar as migrações com o banco: `python manage.py migrate` 
+    - Esse comando executa os arquivos de migração no banco, sincronizando-o com os modelos definidos. Não se esqueça de executar esse comando após cada alteração nos modelos.
