@@ -48,6 +48,9 @@
         </style>
 </head>
 <body>
+    <h2>Editar {{ doc }}</h2>
+    <button onclick="myConfirm('Certeza que quer deletar {{ doc }} ?')">Deletar</button>
+    <button onclick="location.href = '{% url 'url_index' %}' ">Voltar</button>
     <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         
@@ -87,6 +90,20 @@
                     <i class="fas fa-info-circle help" title="{{ form.url.help_text|safe }}"></i>
             {% endif %}
         </div>
+
+        {% if cat %}
+        <h3>Categorias:</h3>
+        <ul>
+            {% for categoria in cat %}
+            <li><input type="checkbox" name="categorias" 
+                {% if categoria in checked_cat %}
+                checked
+                {% endif %}    
+            id="id_{{ categoria }}" value="{{ categoria.id }}">{{ categoria }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
         {% if user.is_superuser %}
         <button class="fieldWrapper" name="val" type="submit">Save & Validate</button>
         {% endif %}
@@ -108,8 +125,6 @@
         {% endif %}
         <button class="fieldWrapper" type="submit" name="add">Adicionar Contribuidores</button>
     </form>
-    <button onclick="myConfirm('Certeza que quer deletar {{ doc }} ?')">Deletar</button>
-    <button onclick="location.href = '{% url 'url_index' %}' ">Voltar</button>
 
     <script>
         var date = "{{ form.date.value }}".split(" ");

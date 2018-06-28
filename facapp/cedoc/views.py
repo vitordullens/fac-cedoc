@@ -48,6 +48,9 @@ def edit(request, pk):
     data = {}
     data['doc'] = f
     data['form'] = form
+    if isinstance(f, AudioVisual):
+        data['cat'] = Categoria.objects.all()
+        data['checked_cat'] = f.categories.all()
     c  = Contributor.objects.filter(paper=pk)
     data['contributors'] = c
     if request.method == 'POST' and form.is_valid:
@@ -62,7 +65,6 @@ def edit(request, pk):
         elif 'add' in request.POST: # adiciona contribuidores
             return redirect(reverse_lazy('url_contribs', args=[f.pk]))
         # nao eh contribuidor, entao eh arquivo 
-        # FIXME: Apertar o botão limpar e escolher novo arquivo causa bug.
         if 'File' in request.FILES and f.File: # novo arquivo sendo inserido no lugar de antigo
             deleteFile(request, f.pk)
         try:
@@ -74,6 +76,13 @@ def edit(request, pk):
             deleteFile(request, entry.pk)
         if 'val' in request.POST:   # validate entry
                 entry.accepted = True
+        if isinstance(f, AudioVisual):
+            categories = request.POST.getlist('categorias')
+            selected = []
+            for c in categories:
+                selected.append(Categoria.objects.get(pk=c))
+
+            entry.categories.set(selected)
         entry.save()
         return redirect('url_index')
     return render(request, 'cedoc/edit.html', data)
