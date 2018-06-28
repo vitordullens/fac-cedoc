@@ -19,7 +19,7 @@ O sistema foi desenvolvido inicialmente para a disciplina Desenvolvimento de Apl
 
 ## Funcionalidades do Sistema
 ### Para usuários comuns (professores e alunos da FAC)
-- Envio de arquivos do Jormal Campus para o Cedoc;
+- Envio de arquivos do Jornal Campus para o Cedoc;
 - Envio de arquivos da Revista Campus Repórter para o Cedoc;
 - Envio de arquivos audiovisuais para o Cedoc;
 - Possibilidade de edição dos arquivos enviados;
@@ -35,7 +35,7 @@ O sistema foi desenvolvido inicialmente para a disciplina Desenvolvimento de Apl
 Os arquivos aceitos até agora são arquivos `.pdf` para Jornal Campus e Revista Compus Repórter. Para a modalidade audiovisual os arquivos aceitos são `.mp3` e `.mp4`. Se você precisa enviar um tipo de arquivo que não está entre esses deve pedir ao Cedoc para disponibilizar esta nova extensão.
 
 ### Importante: 
-Se vocẽ está dentro do sistema, i.e. já fez o seu login, lembre-se de fazer o **logout** antes de fechar o navegador. Se você não fizer isso continuará dentro do sistema, e qualquer pessoa que use aquele computador poderá enviar arquivos ou deletar arquivos que você enviou.
+Se você está dentro do sistema, i.e. já fez o seu login, lembre-se de fazer o **logout** antes de fechar o navegador. Se você não fizer isso continuará dentro do sistema, e qualquer pessoa que use aquele computador poderá enviar arquivos ou deletar arquivos que você enviou.
 
 ## Interfaces do Sistema
 ### Menu de Login
@@ -65,7 +65,7 @@ No menu acima, a opção `Adicionar Documento` abre as opções para escolher o 
 
 ![Opções](assets/option.png)
 
-Conformeespecificado acima, as opções disponíveis são: Audiovisual, Jormal Campus e Campus Repórter. Selecionando cadaa opção o usuário é redirecionado para o formulário de envio de cada tipo de arquivo. Veja detalhes abaixo.
+Conforme especificado acima, as opções disponíveis são: Audiovisual, Jornal Campus e Campus Repórter. Selecionando cada opção o usuário é redirecionado para o formulário de envio de cada tipo de arquivo. Veja detalhes abaixo.
 
 ## Do Envio de Arquivos
 
@@ -81,7 +81,7 @@ Tratemos então dos campos que merecem algum destaque:
     - Arquivo Físico é para sinalizar que uma cópia física do material foi enviada para o Cedoc.
 - No campo `Duração` para arquivos audiovisuais, utilize o formato `hh:mm:ss`.
 
-Os formulários tem pelo menos 2 partes. Os arquivos audiovisuais e Jornal Campus tem formulários de 3 partes. As partes subsequentes são informações adicionais que envolvem:
+Os formulários têm pelo menos 2 partes. Os arquivos audiovisuais e Jornal Campus têm formulários de 3 partes. As partes subsequentes são informações adicionais que envolvem:
 
 - Para todos os arquivos: Os contribuidores do trabalho e seu papel;
 - Para os arquivos audiovisuais: Os certificados recebidos pelo trabalho;
