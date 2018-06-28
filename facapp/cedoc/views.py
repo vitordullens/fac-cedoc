@@ -65,15 +65,16 @@ def edit(request, pk):
         elif 'add' in request.POST: # adiciona contribuidores
             return redirect(reverse_lazy('url_contribs', args=[f.pk]))
         # nao eh contribuidor, entao eh arquivo 
-        if 'File' in request.FILES and f.File: # novo arquivo sendo inserido no lugar de antigo
-            deleteFile(request, f.pk)
-        try:
-            entry = form.save(commit=False)
-        except ValueError:
+        if 'File' in request.FILES and 'File-clear' in request.POST: # novo arquivo sendo inserido no 
             data['file_error'] = 'Não selecione um novo arquivo e o campo limpar ao mesmo tempo.'
             return render(request, 'cedoc/edit.html', data)
-        if 'File-clear' in request.POST and not request.FILES: # process file clear request, not yet processed
+        elif 'File' in request.FILES and f.File:
+            deleteFile(request, f.pk)
+            
+        entry = form.save(commit=False)
+        if 'File-clear' in request.POST : # process file clear request, not yet processed
             deleteFile(request, entry.pk)
+        
         if 'val' in request.POST:   # validate entry
                 entry.accepted = True
         if isinstance(f, AudioVisual):
