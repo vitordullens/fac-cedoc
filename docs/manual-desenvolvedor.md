@@ -36,7 +36,7 @@ A pasta `accounts` é onde se encontra tudo relacionado as contas criadas e util
 - `views.py`
     - Definem a função de cadastramento a partir do formulário e a valida.
 
-## ``django-admin`
+## `django-admin`
 
 O `django-admin` é uma funcionalidade inclusa próprio Django que possui diversas funcionalidades de administrador além de uma interface amigável para o mesmo. Ele pode ser acessada colocando `/admin` no endereço da página.
 
@@ -58,10 +58,10 @@ Atualmente o sistema está organizado para ambiente de desenvolvimento. Para col
 
 A aplicação `accounts` é responsável por cadastrar e fornecer suporte para os usuários externos ao Cedoc. Todos esses são usuários comuns do sistema. Um superusuário é criado de maneira diferente. Recomendamos que só exista 1 superusuário, cadastrado da seguinte maneira:
 
-    ```bash
-    $ cd facapp
-    $ python manage.py createsuperuser
-    ```
+```bash
+$ cd facapp
+$ python manage.py createsuperuser
+```
 
 Você terá que preencher os dados do usuário - nome, e-mail e senha. Sugerimos `Cedoc` como o nome. O e-mail deve ser `cedoc@fac.unb.br`. A senha deve ser uma sena forte, pois este usuário tem muito controle sobre o sistema.
 
