@@ -18,5 +18,5 @@ Para informações mais detalhadas sobre a aplicação acesse a pasta [docs](doc
     - [ ] Revisar manual de uso.
     - [ ] Adicionar Diagrama de models.
 - [X] Ajustar pagina de categorias;
-- [ ] Resolver problema da data (não aparece a data do documento na view edit).
+- [X] Resolver problema da data (não aparece a data do documento na view edit).
 

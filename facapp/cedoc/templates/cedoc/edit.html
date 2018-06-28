@@ -25,6 +25,20 @@
                 if (confirm(str))
                     location.href = "{% url 'url_delete' doc.id %}";
             }
+
+            var month = {};
+            month["Janeiro"] = "01";
+            month["Fevereiro"] = "02";
+            month["Março"] = "03";
+            month["Abril"] = "04";
+            month["Maio"] = "05";
+            month["Junho"] = "06";
+            month["Julho"] = "07";
+            month["Agosto"] = "08";
+            month["Setembro"] = "09";
+            month["Outubro"] = "10";
+            month["Novembro"] = "11";
+            month["Dezembro"] = "12";
         </script>
     
         <style>
@@ -96,5 +110,16 @@
     </form>
     <button onclick="myConfirm('Certeza que quer deletar {{ doc }} ?')">Deletar</button>
     <button onclick="location.href = '{% url 'url_index' %}' ">Voltar</button>
+
+    <script>
+        var date = "{{ form.date.value }}".split(" ");
+        var day = date[0]
+        if (day < 10){
+            day = "0" + day;
+        }
+        day = day.toString();
+        var new_date = date[4].toString() + "-" + month[date[2]] + "-" + day;
+        document.getElementById("id_date").value = new_date;
+    </script>
 </body>
 </html>
