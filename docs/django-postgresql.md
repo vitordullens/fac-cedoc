@@ -9,9 +9,9 @@
 
 1. Abra uma nova aba no terminal e crie um DATABASE do postgreSQL:
 ```bash
-sudo -i -u postgres
-psql
-create database <name>;
+$ sudo -i -u postgres
+$ psql
+$ create database <name>;
 ```
 2. vá em [settings.py](/facapp/facapp/settings.py):
 ```python
