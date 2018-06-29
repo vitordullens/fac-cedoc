@@ -39,7 +39,7 @@ form input[type="checkbox"]{
   width: auto;
 }
 
-form button[type="submit"], form button[name="new_cat"]{
+form button[type="submit"], form button[name="new_cat"], #personalizado{
   background: #1B3F79;
   border: 0;
   width: 40%;
@@ -54,7 +54,7 @@ form button[type="submit"], form button[name="new_cat"]{
   text-align: center;
 }
 
-form button[type="submit"]:hover, form button[name="new_cat"]:hover{
+form button[type="submit"]:hover, form button[name="new_cat"]:hover, #personalizado:hover{
   background-image: linear-gradient(to right, #1B3F79 0%, #168740 100%);
 }
 
