@@ -11,6 +11,9 @@ from .models import CampusJournal, CampusReporter, AudioVisual, Contributor, Doc
 
 # Functions
 def getUnknownModel(request, pk):
+    """Está função é reponsavél por pegar qual dos botões foram clicados, afim de
+    mostrar corretamente o formulário para cada tipo de arquivo.
+    """
     try:
         f = CampusJournal.objects.get(pk=pk)
         form = JournalUpload(request.POST or None, request.FILES or None, instance=f)
@@ -29,6 +32,12 @@ def getUnknownModel(request, pk):
 # Create your views here.
 
 def index(request):
+    """Está é a função de visualização da pagina 'home',
+    nela é verificado se o usuario está autentica, se sim, mostra para
+    ele os documentos que o mesmo enviou, se não ele volta para a pagina de login.
+    O usuário pode ser superusuario, sendo assim ele pode ver todas as publicações,
+    de qualquer pessoa.
+    """
     data = {}
     if request.user.is_authenticated:
         if not request.user.is_superuser:
@@ -304,6 +313,10 @@ def certificates(request, pk):
         return HttpResponseForbidden()
 
 def categories(request):
+    """Responsável por cuidar das categorias do audiovisual, essa função faz com que
+    todos os usuários possam ver as categorias do campo do audiovisual.
+    Os administradores podem além de visualizar, deleter( 'deleteCategory()' ) e adicionar novas categorias.
+    """
     data = {}
     data['category'] = Categoria.objects.all()
     if request.user.is_superuser:

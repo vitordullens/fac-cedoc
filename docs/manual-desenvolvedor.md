@@ -36,6 +36,8 @@ A pasta `cedoc` é, de certa forma, onde mora a parte "funcional" do projeto. É
     - Definem as funções a serem executadas para cada request recebido pelo server, e qual a resposta.
 - `forms.py`
     - Define os formulários de envio para todos os modelos em `models.py`.
+- `validators.py`
+    - Define quais são as extensões de arquivo permitidas para os diferentes tipos de arquivo.
 
 ## `accounts`
 

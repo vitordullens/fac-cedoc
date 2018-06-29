@@ -24,20 +24,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # urls relacionadas aos accounts
     path('admin/', admin.site.urls),
     path('login', authViews.login, name='login'),
     path('logout', authViews.logout, name='logout'),
-    path('password_reset', authViews.password_reset, name='password_reset'),
     path('signup/', accountsViews.SignUp, name='url_signup'),
-
+    # urls relacionadas ao envio dos arquivos
     path('', cedocViews.index, name='url_index'),
     path('option', cedocViews.option, name='url_option'),
     path('<str:btn>/new_entry/', cedocViews.new_entry, name='url_new_entry'),
-    path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
     path('contributors/<int:pk>', cedocViews.contribs, name='url_contribs'),
     path('index/<int:pk>', cedocViews.idx, name='url_idx'),
     path('certificates/<int:pk>', cedocViews.certificates, name='url_certificates'),
-
+    # urls relacionadas a edição e remoção de arquivos
+    path('delete/<int:pk>', cedocViews.delete, name='url_delete'),
     path('categories/', cedocViews.categories, name='url_categories'),
     path('categories/delete/<int:pk>', cedocViews.deleteCategory, name='url_delete_category'),
     path('edit/<int:pk>', cedocViews.edit, name='url_edit'),
