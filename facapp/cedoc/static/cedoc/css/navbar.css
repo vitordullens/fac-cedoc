@@ -1,3 +1,13 @@
+html, body{
+  background: url(background/painel_final_fundo.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
 .navbar{
     border-radius: 0px;
     background-color: #1B3F79;

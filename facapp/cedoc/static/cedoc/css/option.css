@@ -1,12 +1,3 @@
-html, body{
-  background: url(background/painel_final_fundo.png) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-}
 .corpo{
     color: white;
 
@@ -17,6 +8,9 @@ html, body{
 #menu{
     margin-top: 5%;
     text-align: center;
+}
+#menu h3{
+    margin-bottom: 3.5%;
 }
 #menu ul {
     padding: 0px;
@@ -42,3 +36,5 @@ html, body{
         padding-top: 2%;
     }
 }
+
+

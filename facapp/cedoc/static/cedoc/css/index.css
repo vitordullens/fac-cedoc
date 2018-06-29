@@ -1,46 +1,54 @@
-html, body{
-  background: url(background/painel_final_fundo.png) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-}
-
 .corpo{
     padding-top: 0%;
-    color: blanchedalmond;
 }
 
-
+.corpo ul h3, .corpo ul p{
+    color: white;
+}
+#id_categoria{
+    color: black;
+}
  table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 80%;
-        }
+   font-family: arial, sans-serif;
+    border-collapse: collapse;
+     color: white;
 
-        th {
-            background-color: darkblue;
-            border: 1px solid blanchedalmond;
-            text-align: left;
-            padding: 8px;
-        }
+}
+table tr th, table tr td{
+    text-align: center;
+}
+td , th{
+    border: 1px solid white;
+    padding: 8px;
+    background-color: #2D7C42;
+}
 
-        tr:nth-child(odd) {
-          background-color: darkblue;
-        }
-        tr:nth-child(even) {
-            background-color: darkgreen;
-        }
+td button{
+    background-color: grey;
+    border: 1px solid white;
+    width: 100%;
+    border-radius: 3px;
+
+}
+
+td button:hover{
+    background-color: dimgrey;
+}
+
+#com_cor{
+    background-color: #1B3F79;
+}
+#sem_borda{
+    border: 0px;
+    background-color: #11ffee00 ;
+}
 
 
 #ajuste_logo_sistema{
-  display: block;
-  margin: 0 auto;
   margin-top: 1%;
   margin-bottom: 1%;
-  max-width: 20%;
+    margin-right: 2%;
+  max-width: 25%;
 }
 #ajuste_icone{
   width: 40%;

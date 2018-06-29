@@ -1,37 +1,44 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends 'cedoc/base.html'%}
+
+{%block cabecalho %}
+    {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/contribs.css' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>Contributors</title>
-</head>
-<body>
-    <h2>Adicionar {{ item }} </h2> 
-    <h2>Atenção! Coloque o número correto de {{ item }} antes de começar a preencher.</h2>
+{%endblock%}
 
-    <form action="{% url return pk %}" method="POST">
-        {% csrf_token %}
+{% block conteudo %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12 corpo">
+            <div class="row">
+               <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 formualario">
+                    <h2>Adicionar {{ item }} </h2>
+                    <h3>Atenção! Coloque o número correto de {{ item }} antes de começar a preencher.</h3>
+                    <div id="login">
 
-        {% for contrib in forms%}
-        <h3> {{ contrib.prefix }} </h3>
-            <div style="display: inline;"> {{ contrib.as_p }} </div>
-        {% endfor %}
+                        <form action="{% url return pk %}" method="POST">
+                            {% csrf_token %}
 
-        <input name="i" type="number" value="{{ i }}" style="display: none" readonly>
-        
-        <button class="fieldWrapper" method="POST" type="submit">Salvar</button>
-    </form>
+                            {% for contrib in forms%}
+                            <h3> {{ contrib.prefix }} </h3>
+                                {{ contrib.as_p }}
+                            {% endfor %}
 
-    <form action="{% url return pk %}" method="GET">
-        {% csrf_token %}
-        <input name="i" type="number" value="{{ i }}" style="display: none">
-        <button type="submit"><i class="fas fa-plus"></i>Novo {{ item }}</button>
-    </form>
+                            <input name="i" type="number" value="{{ i }}" style="display: none" readonly>
 
-    
-</body>
-</html>
+                            <button class="fieldWrapper" method="POST" type="submit">Salvar</button>
+                        </form>
+
+                        <form action="{% url return pk %}" method="GET">
+                            {% csrf_token %}
+                            <input name="i" type="number" value="{{ i }}" style="display: none">
+                            <button type="submit">Novo {{ item }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

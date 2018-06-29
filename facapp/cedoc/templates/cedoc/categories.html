@@ -1,60 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends 'cedoc/base.html'%}
+
+{%block cabecalho %}
+    {% load staticfiles %}
     <title>Categorias</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 80%;
-        }
-    
-        td,
-        th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-    
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-</head>
-<body>
-    <h1>Categorias Audiovisual</h1>
-    <ul>
-        <table>
-            <tr>
-                <th>Categoria</th>
-                {% if user.is_superuser %}
-                <th>Deletar</th>  
-                {% endif %}  
-            </tr>
-            {% for cat in category %}
-            <tr>
-                <td>{{ cat.categoria }}</td>
-                 {% if user.is_superuser %}
-                <td> <button name="cats" onclick="location.href = '{% url 'url_delete_category' cat.id %}'">Delete</button> </td>
-                 {% endif %}
-            </tr>
-            {% endfor %}
-        </table>
+    <link rel="stylesheet" type="text/css" href="{% static 'cedoc/css/index.css' %}">
+{%endblock%}
 
-         {% if string == "" %}
-        <p>Adicionar nova Categoria</p>
-        <form action="{% url 'url_categories' %}" method="POST">
-            {% csrf_token %} {{form.as_p}}
-            <button class="fieldWrapper" type="submit">Salvar</button>
-        </form>
-        {% elif user.is_superuser %}
-        <p>{{ string }}</p>
-        <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_categories' %}'">Nova Categoria</button>
-        {% endif %}
 
-    </ul> 
-</body>
-</html>
+{% block conteudo %}
+ <div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12 corpo">
+
+                <ul>
+                    <h3>Categorias Audiovisual</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Categoria</th>
+                        </tr>
+                        {% for cat in category %}
+                        <tr>
+                            <td id="com_cor">{{ cat.categoria }}</td>
+                             {% if user.is_superuser %}
+                            <td id="sem_borda"> <button name="cats" onclick="location.href = '{% url 'url_delete_category' cat.id %}'">Delete</button> </td>
+                             {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                     {% if string == "" %}
+                    <p>Adicionar nova Categoria</p>
+                    <form action="{% url 'url_categories' %}" method="POST">
+                        {% csrf_token %} {{form.as_p}}
+                        <button class="fieldWrapper" type="submit">Salvar</button>
+                    </form>
+                    {% elif user.is_superuser %}
+                    <p>{{ string }}</p>
+                    <button name="new_cat" method="GET" onclick="location.href = '{% url 'url_categories' %}'">Nova Categoria</button>
+                    {% endif %}
+
+                </ul>
+        </div>
+    </div>
+ </div>
+{%endblock%}

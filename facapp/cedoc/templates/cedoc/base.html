@@ -8,7 +8,9 @@
     {% block cabecalho %}
     {% endblock %}
     <link rel="stylesheet" href="{%static  'cedoc/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{%static  'cedoc/css/navbar.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static  'cedoc/css/footer.css'%}">
     <style>
       footer {
         position: relative;
@@ -55,34 +57,42 @@
         </nav>
     {% block conteudo %}
     {% endblock%}
-
-    <script src="{%static 'cedoc/js/jquery-3.2.1.min.js'%}"></script>
-    <script src="{%static 'cedoc/js/bootstrap.js'%}"></script>
 </body>
-    <!-- Footer -->
-    <footer class="page-footer font-small blue pt-4 mt-4">
-        <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left">
-              <!-- Content -->
-              <h5 class="text-uppercase">Centro de Documentação - CEDOC</h5>
-              <p> <span class="glyphicon glyphicon-map-marker"></span> Campus Universitário Darcy Ribeiro - ICC Norte <br>
-                 Instituto Central de Ciências Norte, UnB <br>
-                 Asa Norte, Brasília - DF, 70910-900</p>
-    
-              <p> <span class="glyphicon glyphicon-earphone"></span> (61) 3107-6627</p>
-    
-              <p> <span class="glyphicon glyphicon-envelope"></span> cedoc@fac.unb.br</p>
-    
-              
+<footer id="myFooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2 class="logo desabilitado"><a href="#"><img id="ajuste_logo_footer" src="{%static 'cedoc/image/logo_fac.svg'%}" class="img-responsive"></a></h2>
+            </div>
+            <div class="col-sm-5">
+                <h5>Centro de Documentação CEDOC</h5>
+                <ul>
+                    <li><a class="desabilitado" href="#"><span class="glyphicon glyphicon-map-marker"></span> Campus Universitário Darcy Ribeiro - ICC Norte</a></li>
+                    <li><a class="desabilitado" href="#">Instituto Central de Ciências Norte, UnB</a></li>
+                    <li><a class="desabilitado" href="#">Asa Norte, Brasília - DF, 70910-900</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2 segundo">
+                <h5>Sober nós</h5>
+                <ul>
+                    <li><a href="http://fac.unb.br/">FAC</a></li>
+                    <li><a href=href="https://cedocfac.wordpress.com/">CEDOC</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2 terceiro">
+                <h5>Contato</h5>
+                <ul>
+                    <li><a class="desabilitado" href="#"><span class="glyphicon glyphicon-earphone"></span> (61) 3107-6627</a></li>
+                    <li><a class="desabilitado" href="#"><span class="glyphicon glyphicon-envelope"></span> cedoc@fac.unb.br</a></li>
+                </ul>
+            </div>
+
         </div>
-        <!-- Footer Links -->
-      
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-          <a href="https://cedocfac.wordpress.com/" target="_blank">CEDOC - FAC</a>
-        </div>
-        <!-- Copyright -->
-      
-      </footer>
-      <!-- Footer -->
+    </div>
+    <div class="footer-copyright">
+        <p>© 2018 Copyright CEDOC - FAC</p>
+    </div>
+</footer>
+<script src="{%static 'cedoc/js/jquery-3.2.1.min.js'%}"></script>
+<script src="{%static 'cedoc/js/bootstrap.js'%}"></script>
 </html>
