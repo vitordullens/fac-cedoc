@@ -1,7 +1,12 @@
 # Como configurar PostgreSQL no Django
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
-![cabecalho](assets/cabecalho.png)
+| Desenvolvimento: | Professores:     | Disciplina:                    |
+|------------------|------------------|--------------------------------|
+| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens    |                  |                                |
+
 ## Instalações
 1. Ativar seu virtualenv `source <name>/bin/activate`, como está nas [instruções](instructions.md);
 2. [Baixar](https://www.postgresql.org/download/) e instalar o postgreSQL na sua maquina;

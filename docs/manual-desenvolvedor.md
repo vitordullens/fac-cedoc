@@ -1,7 +1,11 @@
 # Manual do Desenvolvedor para o Sistema Fac App
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
-![cabecalho](assets/cabecalho.png)
+| Desenvolvimento: | Professores:     | Disciplina:                    |
+|------------------|------------------|--------------------------------|
+| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens    |                  |                                |
 
 - [Manual do Desenvolvedor para o Sistema Fac App](#manual-do-desenvolvedor-para-o-sistema-fac-app)
 - [Overview](#overview)

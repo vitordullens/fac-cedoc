@@ -2,7 +2,12 @@
 
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
-![cabecalho](assets/cabecalho.png)
+| Desenvolvimento: | Professores:     | Disciplina:                    |
+|------------------|------------------|--------------------------------|
+| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens    |                  |                                |
+
 ##  Começando
 
 1. Instalar o `virtualenv` para a criação de um ambiente virtual isolado: `sudo apt-get install virtualenv`

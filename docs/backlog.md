@@ -1,5 +1,10 @@
 # Product Backlog
-![cabecalho](assets/cabecalho.png)
+
+| Desenvolvimento: | Professores:     | Disciplina:                    |
+|------------------|------------------|--------------------------------|
+| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens    |                  |                                |
 
 1. Receber envio de metadados
 2. Receber arquvios de imagem, vídeo e texto junto com os metadados
