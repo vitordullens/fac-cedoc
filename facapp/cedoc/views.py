@@ -53,6 +53,10 @@ def index(request):
         return redirect(reverse_lazy('login'))
 
 def handleEditExtra(request, kind, id):
+    """
+    Função auxiliar da função edit para deletar modelos relacionados ao modelo Doc na edição.
+    Modelos relacionados são Certificados, Contribuidores e Índices.
+    """
     if kind == 'contributor':
         try:
             Contributor.objects.get(pk=id).delete()
@@ -72,6 +76,13 @@ def handleEditExtra(request, kind, id):
         return "Operation not successful"
 
 def edit(request, pk):
+    """
+    Função de gerenciamento da tela de edição.
+    Renderiza um formulário com a instância do documento a ser editado.
+    Caso a instância tenha modelos relacionados eles serão incluídos também.
+    Se o request é do tipo POST existe a validação do formulário e detecção da ação a ser realizada:
+    Deletar alguma opção extra, salvar as alterações ou salvar e validar.
+    """
     (f, form) = getUnknownModel(request, pk)
     data = {}
     data['doc'] = f
@@ -132,6 +143,10 @@ def option(request):
         return HttpResponseForbidden()
 
 def new_entry(request, btn):
+    """
+    Carrega o formulário correto, dependendo do documento a ser enviado, e o envia para renderização.
+    Verifica se o formulário é válido e grava uma nova instância com os dados enviados.
+    """
     if request.user.is_authenticated:
         data = {}
         form = ""
@@ -173,6 +188,9 @@ def deleteFile(request, pk):
         pass # silence error when no file is there
 
 def delete(request, pk, noReturn=False):
+    """
+    Deleta um Documento do banco de dados e qualquer arquivo referênciado por ele.
+    """
     if request.user.is_authenticated:
         doc = Doc.objects.get(pk=pk)
         deleteFile(request, pk)
@@ -206,6 +224,10 @@ def unboundForms(type, request):
 # REfactoring code would be nice
 
 def contribs(request, pk):
+    """
+    Função para gerenciar múltiplos formulários de contribuidores na mesma tela.
+    Valida e salva todos os contribuidores, referenciando um documento específico.
+    """
     returnUrl = 'url_contribs'
     item = 'contribuidores'
     if request.user.is_authenticated:
