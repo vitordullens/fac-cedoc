@@ -1,10 +1,10 @@
 # Manual do Usuário para o Sistema FacApp
 
-| Desenvolvimento: | Professores:     | Disciplina:                    |
-|------------------|------------------|--------------------------------|
-| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
-| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
-| Vitor Dullens    |                  |                                |
+| Desenvolvimento:            | Professores:     | Disciplina:                    |
+|-----------------------------|------------------|--------------------------------|
+| Felipe Magalhães 14/0138374 | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini 16/0122660 | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens 16/0148260    |                  |                                |
 
 O sistema foi feito para ser bastante intuitivo, então você não deve ter problemas com ele. 
 O sistema foi desenvolvido inicialmente para a disciplina Desenvolvimento de Aplicações - CiC, pelos alunos Vitor F Dullens, Felipe Magalhães e Giovanni M Guidini, em 2018/1.

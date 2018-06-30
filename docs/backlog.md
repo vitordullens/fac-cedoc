@@ -1,10 +1,10 @@
 # Product Backlog
 
-| Desenvolvimento: | Professores:     | Disciplina:                    |
-|------------------|------------------|--------------------------------|
-| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
-| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
-| Vitor Dullens    |                  |                                |
+| Desenvolvimento:            | Professores:     | Disciplina:                    |
+|-----------------------------|------------------|--------------------------------|
+| Felipe Magalhães 14/0138374 | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini 16/0122660 | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens 16/0148260    |                  |                                |
 
 1. Receber envio de metadados
 2. Receber arquvios de imagem, vídeo e texto junto com os metadados

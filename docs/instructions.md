@@ -2,11 +2,11 @@
 
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
-| Desenvolvimento: | Professores:     | Disciplina:                    |
-|------------------|------------------|--------------------------------|
-| Felipe Magalhães | Edison Ishikawa  | Desenvolvimento de Aplicativos |
-| Giovanni Guidini | Marcio Victorino | CIC-122891                     |
-| Vitor Dullens    |                  |                                |
+| Desenvolvimento:            | Professores:     | Disciplina:                    |
+|-----------------------------|------------------|--------------------------------|
+| Felipe Magalhães 14/0138374 | Edison Ishikawa  | Desenvolvimento de Aplicativos |
+| Giovanni Guidini 16/0122660 | Marcio Victorino | CIC-122891                     |
+| Vitor Dullens 16/0148260    |                  |                                |
 
 ##  Começando
 
