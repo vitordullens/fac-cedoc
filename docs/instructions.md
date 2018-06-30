@@ -2,7 +2,7 @@
 
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
-
+![header](assets/header.png)
 ##  Começando
 
 1. Instalar o `virtualenv` para a criação de um ambiente virtual isolado: `sudo apt-get install virtualenv`
