@@ -1,7 +1,7 @@
 # Manual do Desenvolvedor para o Sistema Fac App
 ![Django](https://img.shields.io/badge/Django-v2.x-green.svg)
 
-![header](assets/header.png)
+![cabecalho](assets/cabecalho.png)
 
 - [Manual do Desenvolvedor para o Sistema Fac App](#manual-do-desenvolvedor-para-o-sistema-fac-app)
 - [Overview](#overview)
